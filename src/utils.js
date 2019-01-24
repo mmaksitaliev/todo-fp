@@ -14,6 +14,18 @@ export function curry(fn) {
   return arg => curry(fn.bind(null, arg));
 }
 
+export function pipe(...fns) {
+  return fns.reduce((acc, fn) => (...args) => fn(acc(...args)));
+}
+
+export function allTrue(predicates) {
+  return (...args) => predicates.map(fn => fn(...args)).every(isTrue => isTrue);
+}
+
+export function invert(fn) {
+  return (...args) => !fn(...args);
+}
+
 export function flipTwoArgs(fn) {
   return function(arg1, arg2) {
     return fn(arg2, arg1);

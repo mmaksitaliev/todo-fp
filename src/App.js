@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import TodoListContainer from "./containers/TodoListContainer";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import TodosPage from "./containers/TodosPage";
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <TodoListContainer />
-      </div>
+      <Router>
+        <div>
+          <Route path="/todos" component={TodosPage} />
+        </div>
+      </Router>
     );
   }
 }

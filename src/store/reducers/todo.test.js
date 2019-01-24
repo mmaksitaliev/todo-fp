@@ -1,5 +1,5 @@
 import todoReducer, { intialState } from "./todo";
-import { createTodo, deleteTodo, updateTodo } from "../actions";
+import { createTodo, deleteTodo, updateTodo } from "store/actions";
 
 it("Should return the initial state as no action type specified", () => {
   const action = {};
@@ -11,7 +11,7 @@ it("create TODO", () => {
   const todo = { goal: "Learn FP" };
   const createAction = createTodo(todo);
   const nextState = todoReducer(undefined, createAction);
-  expect(nextState).toEqual([todo]);
+  expect(nextState).toEqual([...intialState, todo]);
 });
 
 it("update TODO", () => {
