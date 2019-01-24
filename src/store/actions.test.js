@@ -1,4 +1,4 @@
-import * as at from "./actions";
+import * as at from "store/actions";
 
 it("test action creators", () => {
   const todo = {};

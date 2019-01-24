@@ -1,0 +1,49 @@
+.sidebar {
+  // margin: 1rem 0;
+  font-size: var(--fs-primary);
+
+  &__list {
+    list-style: none;
+  }
+
+  &__link,
+  &__link:visited {
+    display: block;
+    padding: 1rem 2rem;
+    cursor: pointer;
+
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+
+    &:hover {
+      color: var(--c-link-hover);
+    }
+
+    &.active {
+      color: var(--c-link-active);
+      // background-color: var(--c-link-active);
+    }
+  }
+}
+
+.content__title {
+  font-size: var(--fs-header);
+  margin-bottom: 1.5rem;
+  color: var(--c-title);
+}
+
+.todo {
+  &__list {
+    list-style: none;
+  }
+
+  &__item {
+    padding: 1rem 0;
+    font-size: var(--fs-primary);
+  }
+}
+
+.card {
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+}

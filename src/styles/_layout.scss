@@ -1,0 +1,22 @@
+.app {
+  min-height: 100vh;
+  background-color: var(--c-background);
+  padding-top: 5vh;
+
+  display: grid;
+  grid-template-columns: 5vw [sidebar-start] minmax(min-content, 20vw) [sidebar-end content-start] 1fr [content-end] 5vw;
+  grid-gap: 2rem;
+}
+
+.sidebar {
+  // background-color: #cc99cc;
+  grid-column: sidebar-start / sidebar-end;
+}
+
+.content {
+  // background-color: #ffcccc;
+  grid-column: content-start / content-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

@@ -1,10 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export default function Nav({ path, label }) {
+function Nav({ path, label }) {
   return (
     <li>
-      <NavLink to={path}>{label}</NavLink>
+      <NavLink to={path} className="sidebar__link" activeClassName="active">
+        {label}
+      </NavLink>
     </li>
   );
 }
+
+export default Nav;

@@ -28,6 +28,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "node-sass": "^4.11.0"
   }
 }

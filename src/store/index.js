@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, compose } from "redux";
 import reduxThunk from "redux-thunk";
 
-import reducers from "./reducers";
+import rootReducer from "store/reducers";
 
 let composeEnhancers = compose;
 
@@ -12,7 +12,7 @@ if (window.__DEV__ || process.env.NODE_ENV === "development") {
 }
 
 const store = createStore(
-  reducers,
+  rootReducer,
   composeEnhancers(applyMiddleware(reduxThunk))
 );
 

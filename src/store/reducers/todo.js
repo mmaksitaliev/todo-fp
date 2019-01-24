@@ -1,6 +1,5 @@
 import { TODO_CREATE, TODO_UPDATE, TODO_DELETE } from "store/actions";
-import createReducer from "./createReducer";
-import { curry, equalBy } from "utils";
+import { curry, equalBy, createReducer } from "utils";
 import * as TodoService from "domain/TodoService";
 
 const equalById = curry(equalBy)("id");

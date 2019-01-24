@@ -40,3 +40,15 @@ export function updateProp(prop, obj, value) {
   obj[prop] = value;
   return obj;
 }
+
+export function createReducer(initialState, handlers) {
+  return function(state = initialState, action) {
+    const reducer = handlers[action.type];
+    if (reducer) return reducer(state, action);
+    return state;
+  };
+}
+
+export function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

@@ -1,0 +1,87 @@
+$numeric: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+$textual: (
+  "xlg": 8,
+  "lg": 6,
+  "md": 4,
+  "sm": 2,
+  "xsm": 1
+);
+$unit: rem;
+
+@mixin generateNumeric($prefix, $prop) {
+  @each $num in $numeric {
+    .#{$prefix}-#{$num} {
+      #{$prop}: #{$num}$unit;
+    }
+
+    .#{$prefix}x-#{$num} {
+      #{$prop}-right: #{$num}$unit;
+      #{$prop}-left: #{$num}$unit;
+    }
+
+    .#{$prefix}y-#{$num} {
+      #{$prop}-top: #{$num}$unit;
+      #{$prop}-bottom: #{$num}$unit;
+    }
+
+    .#{$prefix}t-#{$num} {
+      #{$prop}-top: #{$num}$unit;
+    }
+
+    .#{$prefix}b-#{$num} {
+      #{$prop}-bottom: #{$num}$unit;
+    }
+
+    .#{$prefix}r-#{$num} {
+      #{$prop}-right: #{$num}$unit;
+    }
+
+    .#{$prefix}l-#{$num} {
+      #{$prop}-left: #{$num}$unit;
+    }
+  }
+}
+
+@mixin generateTextual($prefix, $prop) {
+  @each $key, $value in $textual {
+    .#{$prefix}-#{$key} {
+      #{$prop}: #{$value}$unit;
+    }
+
+    .#{$prefix}-#{$key} {
+      #{$prop}: #{$value}$unit;
+    }
+
+    .#{$prefix}x-#{$key} {
+      #{$prop}-right: #{$value}$unit;
+      #{$prop}-left: #{$value}$unit;
+    }
+
+    .#{$prefix}y-#{$key} {
+      #{$prop}-top: #{$value}$unit;
+      #{$prop}-bottom: #{$value}$unit;
+    }
+
+    .#{$prefix}t-#{$key} {
+      #{$prop}-top: #{$value}$unit;
+    }
+
+    .#{$prefix}b-#{$key} {
+      #{$prop}-bottom: #{$value}$unit;
+    }
+
+    .#{$prefix}r-#{$key} {
+      #{$prop}-right: #{$value}$unit;
+    }
+
+    .#{$prefix}l-#{$key} {
+      #{$prop}-left: #{$value}$unit;
+    }
+  }
+}
+
+@include generateNumeric(m, margin);
+@include generateNumeric(p, padding);
+
+@include generateTextual(m, margin);
+@include generateTextual(p, padding);

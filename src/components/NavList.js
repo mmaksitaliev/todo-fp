@@ -3,7 +3,7 @@ import Nav from "./Nav";
 
 export default function NavList({ links }) {
   return (
-    <ul>
+    <ul className="sidebar__list">
       {links.map((link, i) => (
         <Nav key={i} {...link} />
       ))}
