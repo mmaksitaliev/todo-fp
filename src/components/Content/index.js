@@ -1,11 +1,10 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { compose, bindActionCreators } from "redux";
+import { compose } from "redux";
 
 import { filterByPathname } from "domain/TodoService";
 import { capitalize } from "utils";
 import Content from "./Content";
-import { createTodo } from "store/actions";
 
 const mapStateToProps = (state, props) => {
   let { pathname } = props.location;
@@ -17,21 +16,9 @@ const mapStateToProps = (state, props) => {
   return { todos, title };
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      createTodo,
-    },
-    dispatch
-  );
-};
-
 const composed = compose(
   withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+  connect(mapStateToProps)
 );
 
 export default composed(Content);

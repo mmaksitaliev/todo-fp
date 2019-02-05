@@ -1,3 +1,12 @@
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
+.spacebtw {
+  justify-content: space-between;
+}
+
 .sidebar {
   font-size: var(--fs-primary);
 
@@ -25,7 +34,7 @@
 
 .content {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
   &__title {
     font-size: var(--fs-header);
@@ -33,12 +42,9 @@
     color: var(--c-title);
   }
 
-  .todo__list {
-    flex: 1 auto;
-  }
-
-  .new_todo {
-    flex: 1 auto;
+  &__header {
+    display: flex;
+    justify-content: space-between;
   }
 }
 
@@ -56,21 +62,20 @@
     display: flex;
     justify-content: space-between;
   }
-
-  &__goal {
-    // align-self: flex-start;
-  }
-
-  &__completed {
-    // align-self: flex-start;
-  }
 }
 
-.new_todo {
+.todo-form {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+
+  &__submit-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row-reverse;
+  }
 }
 
-.card {
-  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+.muted {
+  font-size: var(--fs-secondary);
+  color: var(--c-muted);
 }

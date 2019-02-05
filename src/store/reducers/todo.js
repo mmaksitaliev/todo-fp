@@ -4,23 +4,17 @@ import {
   TODO_DELETE,
   TODO_TOGGLE_COMPLETE,
 } from "store/actions";
-import { curry, equalBy, createReducer } from "utils";
+import { curry, equalBy, createReducer, fromNow } from "utils";
 import * as TodoService from "domain/TodoService";
 
 const equalById = curry(equalBy)("id");
 
-function fromNow(days) {
-  const today = new Date();
-  today.setDate(today.getDate() + days);
-  return today;
-}
-
 export const intialState = [
-  TodoService.create("Learn JS", fromNow(10)),
-  TodoService.create("Learn FP", fromNow(20)),
-  TodoService.create("Learn React", fromNow(30)),
-  TodoService.create("Build Todo App", fromNow(0)),
-  TodoService.create("Have fun", fromNow(0), null, true),
+  TodoService.create("Learn JS", null, fromNow(10)),
+  TodoService.create("Learn FP", null, fromNow(20)),
+  TodoService.create("Learn React", null, fromNow(30)),
+  TodoService.create("Build Todo App", null, fromNow(0)),
+  TodoService.create("Have fun", null, fromNow(0), null, true),
 ];
 
 function createTodo(todos, { todo }) {

@@ -4,7 +4,7 @@
   padding-top: 5vh;
 
   display: grid;
-  grid-template-columns: 5vw [sidebar-start] minmax(min-content, 20vw) [sidebar-end content-start] 1fr [content-end] 5vw;
+  grid-template-columns: 15vw [sidebar-start] minmax(min-content, 15vw) [sidebar-end content-start] 1fr [content-end] 20vw;
   grid-gap: 2rem;
 }
 
@@ -16,7 +16,4 @@
 .content {
   // background-color: #ffcccc;
   grid-column: content-start / content-end;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 }

@@ -1,3 +1,23 @@
+import moment from "moment";
+
+const FORMAT = "YYYY-MM-DD HH:mm:ss";
+
+export function isNill(value) {
+  return value === null || value === undefined || value === "";
+}
+
+export function currentTime(params) {
+  return moment().format(FORMAT);
+}
+
+export function formattedDate(date) {
+  return moment(date).format(FORMAT);
+}
+
+export function fromNow(days) {
+  return moment().add(days, "days");
+}
+
 export function loggerHOF(fn, logger = console.log) {
   return (...args) => {
     logger(`Recieved => ${JSON.stringify(args)}`);

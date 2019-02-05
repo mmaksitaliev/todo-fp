@@ -1,19 +1,23 @@
 import { v1 } from "uuid";
-import { curry, invert, allTrue } from "utils";
+import { curry, invert, allTrue, currentTime, isNill } from "utils";
+import moment from "moment";
 
 export function create(
-  goal = "",
+  title = "",
+  description,
   deadline = null,
   tags = [],
   completed = false
 ) {
+  description = isNill(description) ? "Default decription" : description;
   return {
     id: v1(),
-    goal,
+    title,
+    description,
     deadline,
     tags,
     completed,
-    date_created: Date.now(),
+    date_created: currentTime(),
   };
 }
 
@@ -33,24 +37,18 @@ function filterByPredicates(predicates, collection) {
 }
 
 let dateEq = (date1, { deadline: date2 }) => {
-  return (
-    date1 &&
-    date2 &&
-    date1.getDate() === date2.getDate() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getFullYear() === date2.getFullYear()
-  );
+  const mDate1 = date1 && moment(date1);
+  const mDate2 = date2 && moment(date2);
+
+  return mDate1 && mDate2 && mDate1.diff(mDate2, "days") === 0;
 };
 
 const dateGt = (date1, { deadline: date2 }) => {
   // checks date1 < deadline
-  return (
-    date1 &&
-    date2 &&
-    (date1.getDate() < date2.getDate() ||
-      date1.getMonth() < date2.getMonth() ||
-      date1.getFullYear() < date2.getFullYear())
-  );
+  const mDate1 = date1 && moment(date1);
+  const mDate2 = date2 && moment(date2);
+
+  return mDate1 && mDate2 && mDate1.diff(mDate2, "days") < 0;
 };
 
 export function filterTodays(todos) {

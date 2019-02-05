@@ -11,7 +11,7 @@ export default function TodoList({ todos, toggleComplete }) {
         <List.Item>
           <List.Item.Meta
             title={<Header todo={todo} onCompleteChange={toggleComplete} />}
-            description={todo.description || "some description"}
+            description={todo.description}
           />
         </List.Item>
       )}

@@ -10,7 +10,7 @@ export default function NewTodoButton({ onClick }) {
       type="primary"
       shape="round"
       icon="plus"
-      size={"large"}
+      size="default"
       onClick={withoutEvent}>
       New Todo
     </Button>
