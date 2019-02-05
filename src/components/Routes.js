@@ -3,10 +3,11 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 
-export default function Routes({ routes, defaultPath }) {
+export default function Routes({ routes, defRouteIndex }) {
+  const defaultPath = routes[defRouteIndex].path;
   return (
     <Router>
       <Switch>

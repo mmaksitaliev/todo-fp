@@ -1,5 +1,4 @@
 .sidebar {
-  // margin: 1rem 0;
   font-size: var(--fs-primary);
 
   &__list {
@@ -10,9 +9,7 @@
   &__link:visited {
     display: block;
     padding: 1rem 2rem;
-    cursor: pointer;
 
-    text-decoration: none;
     color: inherit;
     transition: color 0.3s;
 
@@ -22,15 +19,27 @@
 
     &.active {
       color: var(--c-link-active);
-      // background-color: var(--c-link-active);
     }
   }
 }
 
-.content__title {
-  font-size: var(--fs-header);
-  margin-bottom: 1.5rem;
-  color: var(--c-title);
+.content {
+  display: flex;
+  flex-direction: row;
+
+  &__title {
+    font-size: var(--fs-header);
+    padding: 0.8rem 0;
+    color: var(--c-title);
+  }
+
+  .todo__list {
+    flex: 1 auto;
+  }
+
+  .new_todo {
+    flex: 1 auto;
+  }
 }
 
 .todo {
@@ -39,9 +48,27 @@
   }
 
   &__item {
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     font-size: var(--fs-primary);
   }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__goal {
+    // align-self: flex-start;
+  }
+
+  &__completed {
+    // align-self: flex-start;
+  }
+}
+
+.new_todo {
+  display: flex;
+  justify-content: center;
 }
 
 .card {
