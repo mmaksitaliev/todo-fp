@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import TodoList from "./TodoList";
-// import {} from "store/actions"
+import { toggleComplete } from "store/actions";
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ toggleComplete }, dispatch);
 }
 
 export default connect(

@@ -1,4 +1,9 @@
-import { TODO_CREATE, TODO_UPDATE, TODO_DELETE } from "store/actions";
+import {
+  TODO_CREATE,
+  TODO_UPDATE,
+  TODO_DELETE,
+  TODO_TOGGLE_COMPLETE,
+} from "store/actions";
 import { curry, equalBy, createReducer } from "utils";
 import * as TodoService from "domain/TodoService";
 
@@ -15,11 +20,18 @@ export const intialState = [
   TodoService.create("Learn FP", fromNow(20)),
   TodoService.create("Learn React", fromNow(30)),
   TodoService.create("Build Todo App", fromNow(0)),
-  TodoService.create("Have fun", fromNow(0), null, true)
+  TodoService.create("Have fun", fromNow(0), null, true),
 ];
 
 function createTodo(todos, { todo }) {
   return todos.concat([todo]);
+}
+
+function toggleComplete(todos, { id }) {
+  return todos.map(todo => {
+    if (todo.id === id) todo.completed = !todo.completed;
+    return todo;
+  });
 }
 
 function updateTodo(todos, { todo: toUpdate }) {
@@ -36,7 +48,8 @@ function deleteTodo(todos, { id }) {
 const handlers = {
   [TODO_CREATE]: createTodo,
   [TODO_UPDATE]: updateTodo,
-  [TODO_DELETE]: deleteTodo
+  [TODO_DELETE]: deleteTodo,
+  [TODO_TOGGLE_COMPLETE]: toggleComplete,
 };
 
 export default createReducer(intialState, handlers);

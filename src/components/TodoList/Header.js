@@ -7,7 +7,7 @@ export default function Header({ todo, onCompleteChange }) {
       <span className="todo__goal">{todo.goal}</span>
       <span className="todo__completed">
         <Checkbox
-          value={todo.completed}
+          checked={todo.completed}
           onChange={value => onCompleteChange(todo.id, value)}
         />
       </span>
