@@ -1,0 +1,30 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["react"],
+  "rules": {
+    "quotes": [2, "single"],
+    "jsx-quotes": [2, "prefer-single"],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "ignore"
+      }
+    ]
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  },
+  "env": {
+    "jest": true,
+    "browser": true,
+    "node": true
+  }
+}

@@ -1,15 +1,21 @@
-import React, { Component } from "react";
-import * as TodoService from "domain/TodoService";
-import { Card, Button, Input, DatePicker, Divider, Icon } from "antd";
-import CloseButton from "components/CloseButton";
-import { formattedDate } from "utils";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import * as TodoService from 'domain/TodoService';
+import { Card, Button, Input, DatePicker, Divider, Icon } from 'antd';
+import CloseButton from 'components/CloseButton';
+import { formattedDate } from 'utils';
 
 const { TextArea } = Input;
 
 export default class Form extends Component {
-  state = { title: "", description: "", deadline: "" };
+  static propTypes = {
+    createTodo: PropTypes.func.isRequired,
+    onHide: PropTypes.func.isRequired,
+  };
 
-  clearTitle = () => this.setState({ title: "" });
+  state = { title: '', description: '', deadline: '' };
+
+  clearTitle = () => this.setState({ title: '' });
 
   onTitleChange = e => {
     this.setState({ title: e.target.value });
@@ -32,35 +38,35 @@ export default class Form extends Component {
   render() {
     const { title, description } = this.state;
     const suffix = title ? (
-      <Icon type="close-circle" onClick={this.clearTitle} />
+      <Icon type='close-circle' onClick={this.clearTitle} />
     ) : null;
     const closeBtn = <CloseButton onClose={this.props.onHide} />;
     return (
-      <Card className="todo-form" title="New Todo" extra={closeBtn}>
+      <Card className='todo-form' title='New Todo' extra={closeBtn}>
         <Input
           value={title}
-          placeholder="Todo title"
+          placeholder='Todo title'
           suffix={suffix}
           onChange={this.onTitleChange}
         />
         <Divider>
-          <span className="muted">Details</span>
+          <span className='muted'>Details</span>
         </Divider>
         <TextArea
           value={description}
-          placeholder="Todo description"
+          placeholder='Todo description'
           autosize={{ minRows: 3 }}
           onChange={this.onDescChange}
         />
 
         <DatePicker
           showTime
-          placeholder="Select Time"
+          placeholder='Select Time'
           onChange={this.onDeadlineChange}
           onOk={this.onDeadlineChange}
         />
-        <div className="todo-form__submit-container">
-          <Button type="primary" icon="plus" onClick={this.onSubmit}>
+        <div className='todo-form__submit-container'>
+          <Button type='primary' icon='plus' onClick={this.onSubmit}>
             Add
           </Button>
         </div>

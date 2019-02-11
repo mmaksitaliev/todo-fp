@@ -1,23 +1,23 @@
-import todoReducer, { intialState } from "./todo";
-import { createTodo, deleteTodo, updateTodo } from "store/actions";
+import { createTodo, deleteTodo, updateTodo } from 'store/actions';
+import todoReducer, { intialState } from './todo';
 
-it("Should return the initial state as no action type specified", () => {
+it('Should return the initial state as no action type specified', () => {
   const action = {};
   const nextState = todoReducer(undefined, action);
   expect(nextState).toBe(intialState);
 });
 
-it("create TODO", () => {
-  const todo = { title: "Learn FP" };
+it('create TODO', () => {
+  const todo = { title: 'Learn FP' };
   const createAction = createTodo(todo);
   const nextState = todoReducer(undefined, createAction);
   expect(nextState).toEqual([...intialState, todo]);
 });
 
-it("update TODO", () => {
-  const state = [{ id: 1, title: "Learn FP" }];
+it('update TODO', () => {
+  const state = [{ id: 1, title: 'Learn FP' }];
 
-  let todo = { id: 1, title: "Learn FP thoroughly" };
+  const todo = { id: 1, title: 'Learn FP thoroughly' };
   let updateAction = updateTodo(todo);
   let nextState = todoReducer(state, updateAction);
   expect(nextState).toEqual([todo]);
@@ -29,8 +29,8 @@ it("update TODO", () => {
   expect(nextState).toEqual(state);
 });
 
-it("remove TODO", () => {
-  const state = [{ id: 1, title: "Learn FP" }];
+it('remove TODO', () => {
+  const state = [{ id: 1, title: 'Learn FP' }];
 
   let deleteAction = deleteTodo(1);
   let nextState = todoReducer(state, deleteAction);

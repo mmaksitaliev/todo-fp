@@ -3,18 +3,18 @@ import {
   TODO_UPDATE,
   TODO_DELETE,
   TODO_TOGGLE_COMPLETE,
-} from "store/actions";
-import { curry, equalBy, createReducer, fromNow } from "utils";
-import * as TodoService from "domain/TodoService";
+} from 'store/actions';
+import { curry, equalBy, createReducer, fromNow } from 'utils';
+import * as TodoService from 'domain/TodoService';
 
-const equalById = curry(equalBy)("id");
+const equalById = curry(equalBy)('id');
 
 export const intialState = [
-  TodoService.create("Learn JS", null, fromNow(10)),
-  TodoService.create("Learn FP", null, fromNow(20)),
-  TodoService.create("Learn React", null, fromNow(30)),
-  TodoService.create("Build Todo App", null, fromNow(0)),
-  TodoService.create("Have fun", null, fromNow(0), null, true),
+  TodoService.create('Learn JS', null, fromNow(10)),
+  TodoService.create('Learn FP', null, fromNow(20)),
+  TodoService.create('Learn React', null, fromNow(30)),
+  TodoService.create('Build Todo App', null, fromNow(0)),
+  TodoService.create('Have fun', null, fromNow(0), null, true),
 ];
 
 function createTodo(todos, { todo }) {

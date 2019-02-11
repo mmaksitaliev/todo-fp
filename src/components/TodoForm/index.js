@@ -1,20 +1,19 @@
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import Form from "./Form";
-import { createTodo } from "store/actions";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createTodo } from 'store/actions';
+import Form from './Form';
 
-const mapStateToProps = state => ({});
+// const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
     {
       createTodo,
     },
     dispatch
   );
-};
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Form);

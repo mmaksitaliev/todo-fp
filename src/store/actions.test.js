@@ -1,6 +1,6 @@
-import * as at from "store/actions";
+import * as at from 'store/actions';
 
-it("test action creators", () => {
+it('test action creators', () => {
   const todo = {};
   const actionCreate = at.createTodo(todo);
   const actionUpdate = at.updateTodo(todo);

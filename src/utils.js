@@ -1,12 +1,12 @@
-import moment from "moment";
+import moment from 'moment';
 
-const FORMAT = "YYYY-MM-DD HH:mm:ss";
+const FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
 export function isNill(value) {
-  return value === null || value === undefined || value === "";
+  return value === null || value === undefined || value === '';
 }
 
-export function currentTime(params) {
+export function currentTime() {
   return moment().format(FORMAT);
 }
 
@@ -15,9 +15,10 @@ export function formattedDate(date) {
 }
 
 export function fromNow(days) {
-  return moment().add(days, "days");
+  return moment().add(days, 'days');
 }
 
+// eslint-disable-next-line no-console
 export function loggerHOF(fn, logger = console.log) {
   return (...args) => {
     logger(`Recieved => ${JSON.stringify(args)}`);
@@ -47,9 +48,7 @@ export function invert(fn) {
 }
 
 export function flipTwoArgs(fn) {
-  return function(arg1, arg2) {
-    return fn(arg2, arg1);
-  };
+  return (arg1, arg2) => fn(arg2, arg1);
 }
 
 export function equalBy(prop, value, obj) {
@@ -57,12 +56,13 @@ export function equalBy(prop, value, obj) {
 }
 
 export function updateProp(prop, obj, value) {
-  obj[prop] = value;
-  return obj;
+  const newObj = { ...obj };
+  newObj[prop] = value;
+  return newObj;
 }
 
 export function createReducer(initialState, handlers) {
-  return function(state = initialState, action) {
+  return (state = initialState, action) => {
     const reducer = handlers[action.type];
     if (reducer) return reducer(state, action);
     return state;
