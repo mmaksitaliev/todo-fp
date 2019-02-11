@@ -6,11 +6,15 @@ export function isNill(value) {
   return value === null || value === undefined || value === '';
 }
 
-export function currentTime() {
+export function currentTimeFomatted() {
   return moment().format(FORMAT);
 }
 
-export function formattedDate(date) {
+export function currentTime() {
+  return moment();
+}
+
+export function formatDate(date) {
   return moment(date).format(FORMAT);
 }
 

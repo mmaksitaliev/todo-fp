@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as TodoService from 'domain/TodoService';
 import { Card, Button, Input, DatePicker, Divider, Icon } from 'antd';
 import CloseButton from 'components/CloseButton';
-import { formattedDate } from 'utils';
+import { formatDate, currentTime } from 'utils';
 
 const { TextArea } = Input;
 
@@ -14,6 +14,7 @@ export default class Form extends Component {
   };
 
   state = { title: '', description: '', deadline: '' };
+  currentDate = currentTime();
 
   clearTitle = () => this.setState({ title: '' });
 
@@ -26,7 +27,7 @@ export default class Form extends Component {
   };
 
   onDeadlineChange = value => {
-    this.setState({ deadline: formattedDate(value) });
+    this.setState({ deadline: formatDate(value) });
   };
 
   onSubmit = () => {
@@ -60,10 +61,12 @@ export default class Form extends Component {
         />
 
         <DatePicker
-          showTime
-          placeholder='Select Time'
+          disabledDate={date => this.currentDate.isAfter(date)}
           onChange={this.onDeadlineChange}
           onOk={this.onDeadlineChange}
+          defaultValue={this.currentDate}
+          placeholder='Select Time'
+          className='mt-2'
         />
         <div className='todo-form__submit-container'>
           <Button type='primary' icon='plus' onClick={this.onSubmit}>

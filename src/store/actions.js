@@ -1,10 +1,7 @@
-export const TODO_CREATE = 'TODO_CREATE';
-
-const TODO_UPDATE = 'TODO_UPDATE';
-
-const TODO_DELETE = 'TODO_DELETE';
-
-const TODO_TOGGLE_COMPLETE = 'TODO_TOGGLE_COMPLETE';
+export const TODO_CREATE = 'TODO_CREATE',
+  TODO_UPDATE = 'TODO_UPDATE',
+  TODO_DELETE = 'TODO_DELETE',
+  TODO_TOGGLE_COMPLETE = 'TODO_TOGGLE_COMPLETE';
 
 export const createTodo = todo => ({ type: TODO_CREATE, todo });
 

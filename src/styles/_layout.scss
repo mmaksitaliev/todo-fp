@@ -4,7 +4,7 @@
   padding-top: 5vh;
 
   display: grid;
-  grid-template-columns: 15vw [sidebar-start] minmax(min-content, 15vw) [sidebar-end content-start] 1fr [content-end] 20vw;
+  grid-template-columns: 23vw [sidebar-start] minmax(min-content, 15vw) [sidebar-end content-start] 1fr [content-end] 23vw;
   grid-gap: 2rem;
 }
 

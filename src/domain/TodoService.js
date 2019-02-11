@@ -1,5 +1,5 @@
 import { v1 } from 'uuid';
-import { curry, invert, allTrue, currentTime, isNill } from 'utils';
+import { curry, invert, allTrue, currentTimeFomatted, isNill } from 'utils';
 import moment from 'moment';
 
 export function create(
@@ -17,7 +17,7 @@ export function create(
     deadline,
     tags,
     completed,
-    date_created: currentTime(),
+    date_created: currentTimeFomatted(),
   };
 }
 
