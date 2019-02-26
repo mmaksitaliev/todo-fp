@@ -28,6 +28,10 @@ $bp-small: 600px;
   box-sizing: border-box;
 }
 
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
 html {
   // applied by default
   font-size: 62.5%;

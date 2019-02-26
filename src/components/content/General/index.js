@@ -4,7 +4,7 @@ import { compose } from 'redux';
 
 import { filterByPathname } from 'domain/TodoService';
 import { capitalize } from 'utils';
-import Content from './Content';
+import General from './General';
 
 const mapStateToProps = (state, props) => {
   let { pathname } = props.location;
@@ -21,4 +21,4 @@ const composed = compose(
   connect(mapStateToProps)
 );
 
-export default composed(Content);
+export default composed(General);

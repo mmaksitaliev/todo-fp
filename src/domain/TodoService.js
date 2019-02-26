@@ -1,15 +1,16 @@
 import { v1 } from 'uuid';
-import { curry, invert, allTrue, currentTimeFomatted, isNill } from 'utils';
+import { curry, invert, allTrue, currentTimeFomatted } from 'utils';
 import moment from 'moment';
 
 export function create(
-  title = '',
+  title,
   description,
-  deadline = null,
+  deadline,
   tags = [],
   completed = false
 ) {
-  description = isNill(description) ? 'Default decription' : description;
+  title = title || 'Default title';
+  description = description || 'Default decription';
   return {
     id: v1(),
     title,
@@ -21,9 +22,10 @@ export function create(
   };
 }
 
-export function update(old, toUpdate) {
-  return { ...toUpdate, id: old.id };
-}
+export const createFromRoutine = routine => {
+  const deadline = currentTimeFomatted();
+  return create(routine.title, routine.description, deadline);
+};
 
 const isCompleted = ({ completed }) => completed;
 const notCompleted = invert(isCompleted);

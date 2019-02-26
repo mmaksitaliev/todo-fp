@@ -1,5 +1,6 @@
 import {
   TODO_CREATE,
+  TODO_CREATE_BATCH,
   TODO_UPDATE,
   TODO_DELETE,
   TODO_TOGGLE_COMPLETE,
@@ -9,7 +10,7 @@ import * as TodoService from 'domain/TodoService';
 
 const equalById = curry(equalBy)('id');
 
-export const intialState = [
+export const initialState = [
   TodoService.create('Learn JS', null, fromNow(10)),
   TodoService.create('Learn FP', null, fromNow(20)),
   TodoService.create('Learn React', null, fromNow(30)),
@@ -19,6 +20,10 @@ export const intialState = [
 
 function createTodo(todos, { todo }) {
   return todos.concat([todo]);
+}
+
+function createTodos(todos, { newTodos }) {
+  return todos.concat(newTodos);
 }
 
 function toggleComplete(todos, { id }) {
@@ -41,9 +46,10 @@ function deleteTodo(todos, { id }) {
 
 const handlers = {
   [TODO_CREATE]: createTodo,
+  [TODO_CREATE_BATCH]: createTodos,
   [TODO_UPDATE]: updateTodo,
   [TODO_DELETE]: deleteTodo,
   [TODO_TOGGLE_COMPLETE]: toggleComplete,
 };
 
-export default createReducer(intialState, handlers);
+export default createReducer(initialState, handlers);

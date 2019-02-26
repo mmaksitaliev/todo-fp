@@ -14,6 +14,7 @@ export const routes = [
   { path: '/today', label: 'Today', component: MainPage },
   { path: '/upcoming', label: 'Upcoming', component: MainPage },
   { path: '/completed', label: 'Completed', component: MainPage },
+  { path: '/routines', label: 'Routines', component: MainPage },
 ];
 
 class App extends Component {

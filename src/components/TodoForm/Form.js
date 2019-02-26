@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Card, Input, DatePicker, Divider, Icon } from 'antd';
 import * as TodoService from 'domain/TodoService';
-import { Card, Button, Input, DatePicker, Divider, Icon } from 'antd';
-import CloseButton from 'components/CloseButton';
+import { AddButton, CloseButton } from 'components/Buttons';
 import { formatDate, currentTime } from 'utils';
 
 const { TextArea } = Input;
@@ -13,8 +13,11 @@ export default class Form extends Component {
     onHide: PropTypes.func.isRequired,
   };
 
-  state = { title: '', description: '', deadline: '' };
-  currentDate = currentTime();
+  constructor(props) {
+    super(props);
+    this.currentTime = currentTime();
+    this.state = { title: '', description: '', deadline: this.currentTime };
+  }
 
   clearTitle = () => this.setState({ title: '' });
 
@@ -26,21 +29,25 @@ export default class Form extends Component {
     this.setState({ description: e.target.value });
   };
 
-  onDeadlineChange = value => {
-    this.setState({ deadline: formatDate(value) });
+  onDeadlineChange = deadline => {
+    this.setState({ deadline });
   };
 
   onSubmit = () => {
     const { title, description, deadline } = this.state;
-    const todo = TodoService.create(title, description, deadline);
+    const date = deadline && formatDate(deadline);
+    const todo = TodoService.create(title, description, date);
     this.props.createTodo(todo);
+    this.props.onHide();
   };
 
   render() {
-    const { title, description } = this.state;
+    const { title, description, deadline } = this.state;
     const suffix = title ? (
       <Icon type='close-circle' onClick={this.clearTitle} />
-    ) : null;
+    ) : (
+      <span />
+    );
     const closeBtn = <CloseButton onClose={this.props.onHide} />;
     return (
       <Card className='todo-form' title='New Todo' extra={closeBtn}>
@@ -61,17 +68,15 @@ export default class Form extends Component {
         />
 
         <DatePicker
-          disabledDate={date => this.currentDate.isAfter(date)}
+          disabledDate={date => this.currentTime.isAfter(date)}
           onChange={this.onDeadlineChange}
           onOk={this.onDeadlineChange}
-          defaultValue={this.currentDate}
+          value={deadline}
           placeholder='Select Time'
           className='mt-2'
         />
         <div className='todo-form__submit-container'>
-          <Button type='primary' icon='plus' onClick={this.onSubmit}>
-            Add
-          </Button>
+          <AddButton onClick={this.onSubmit} />
         </div>
       </Card>
     );
