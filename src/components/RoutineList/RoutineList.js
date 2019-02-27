@@ -13,7 +13,7 @@ export default function RoutineList({ routines }) {
         <List.Item>
           <List.Item.Meta
             title={<Header title={routine.title} />}
-            description={routine.description}
+            description={routine.comment}
           />
         </List.Item>
       )}

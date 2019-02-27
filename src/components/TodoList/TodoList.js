@@ -25,7 +25,7 @@ export default function TodoList({ todos, toggleComplete }) {
                 onChange={toggleComplete}
               />
             }
-            description={todo.description}
+            description={todo.comment}
           />
         </List.Item>
       )}

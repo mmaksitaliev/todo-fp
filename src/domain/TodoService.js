@@ -8,19 +8,12 @@ import {
 } from 'utils';
 import moment from 'moment';
 
-export function create(
-  title,
-  description,
-  deadline,
-  tags = [],
-  completed = false
-) {
+export function create(title, comment, deadline, tags = [], completed = false) {
   title = title || 'Default title';
-  description = description || 'Default decription';
   return {
     id: v1(),
     title,
-    description,
+    comment,
     deadline,
     tags,
     completed,
@@ -30,7 +23,7 @@ export function create(
 
 export const createFromRoutine = routine => {
   const deadline = currentTimeFomatted();
-  return create(routine.title, routine.description, deadline);
+  return create(routine.title, routine.comment, deadline);
 };
 
 const isCompleted = ({ completed }) => completed;

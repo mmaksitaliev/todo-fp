@@ -1,7 +1,6 @@
 import { v1 } from 'uuid';
 
-export const create = (title, description) => {
+export const create = (title, comment) => {
   title = title || 'Default title';
-  description = description || 'Default description';
-  return { id: v1(), title, description };
+  return { id: v1(), title, comment };
 };

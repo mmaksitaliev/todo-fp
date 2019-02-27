@@ -5,7 +5,7 @@ import { create } from 'domain/RoutineService';
 export const initialState = [
   create('Clean out inbox'),
   create('Exercise'),
-  create('Be kind'),
+  create('Be kind', 'be kind to people'),
 ];
 
 export const createRoutine = (state, { routine }) => {
