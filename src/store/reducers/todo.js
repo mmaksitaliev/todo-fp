@@ -11,6 +11,7 @@ import * as TodoService from 'domain/TodoService';
 const equalById = curry(equalBy)('id');
 
 export const initialState = [
+  TodoService.create('Have fun [YESTERDAY]', null, fromNow(-2), null, true),
   TodoService.create('Learn JS', null, fromNow(10)),
   TodoService.create('Learn FP', null, fromNow(20)),
   TodoService.create('Learn React', null, fromNow(30)),

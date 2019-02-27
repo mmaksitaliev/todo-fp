@@ -2,7 +2,11 @@ import { createReducer } from 'utils';
 import { ROUTINE_CREATE, ROUTINE_UPDATE, ROUTINE_DELETE } from 'store/actions';
 import { create } from 'domain/RoutineService';
 
-export const initialState = [create(), create()];
+export const initialState = [
+  create('Clean out inbox'),
+  create('Exercise'),
+  create('Be kind'),
+];
 
 export const createRoutine = (state, { routine }) => {
   return state.concat(routine);

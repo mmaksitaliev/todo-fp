@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, Input, DatePicker, Divider, Icon } from 'antd';
 import * as TodoService from 'domain/TodoService';
 import { AddButton, CloseButton } from 'components/Buttons';
-import { formatDate, currentTime } from 'utils';
+import { formatDate, currentTime, endOfToday } from 'utils';
 
 const { TextArea } = Input;
 
@@ -16,7 +16,7 @@ export default class Form extends Component {
   constructor(props) {
     super(props);
     this.currentTime = currentTime();
-    this.state = { title: '', description: '', deadline: this.currentTime };
+    this.state = { title: '', description: '', deadline: endOfToday() };
   }
 
   clearTitle = () => this.setState({ title: '' });

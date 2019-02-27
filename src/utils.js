@@ -18,9 +18,25 @@ export function formatDate(date) {
   return moment(date).format(FORMAT);
 }
 
-export function fromNow(days) {
-  return moment().add(days, 'days');
+export function fromNow(value, unitOfTime = 'day') {
+  return moment().add(value, unitOfTime);
 }
+
+export const endOfYesterday = () => {
+  return moment()
+    .subtract(1, 'day')
+    .endOf('day');
+};
+
+export const endOfToday = () => {
+  return moment().endOf('day');
+};
+
+export const endOfTomorrow = () => {
+  return moment()
+    .add(1, 'day')
+    .endOf('day');
+};
 
 // eslint-disable-next-line no-console
 export function loggerHOF(fn, logger = console.log) {

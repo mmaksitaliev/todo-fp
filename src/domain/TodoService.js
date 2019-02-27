@@ -1,5 +1,11 @@
 import { v1 } from 'uuid';
-import { curry, invert, allTrue, currentTimeFomatted } from 'utils';
+import {
+  curry,
+  allTrue,
+  currentTimeFomatted,
+  endOfToday,
+  endOfYesterday,
+} from 'utils';
 import moment from 'moment';
 
 export function create(
@@ -28,7 +34,6 @@ export const createFromRoutine = routine => {
 };
 
 const isCompleted = ({ completed }) => completed;
-const notCompleted = invert(isCompleted);
 
 function filter(fn, collection) {
   return collection.filter(fn);
@@ -38,29 +43,33 @@ function filterByPredicates(predicates, collection) {
   return collection.filter(allTrue(predicates));
 }
 
-const dateEq = (date1, { deadline: date2 }) => {
+const dateGt = (date1, { deadline: date2 }) => {
+  // checks date1 > deadline
   const mDate1 = date1 && moment(date1);
   const mDate2 = date2 && moment(date2);
 
-  return mDate1 && mDate2 && mDate1.diff(mDate2, 'days') === 0;
+  return mDate1 && mDate2 && mDate1 > mDate2;
 };
 
-const dateGt = (date1, { deadline: date2 }) => {
+const dateLt = (date1, { deadline: date2 }) => {
   // checks date1 < deadline
   const mDate1 = date1 && moment(date1);
   const mDate2 = date2 && moment(date2);
 
-  return mDate1 && mDate2 && mDate1.diff(mDate2, 'days') < 0;
+  return mDate1 && mDate2 && mDate1 < mDate2;
 };
 
 export function filterTodays(todos) {
-  const isTodays = curry(dateEq)(new Date());
-  return filterByPredicates([notCompleted, isTodays], todos);
+  const gtYesterday = dateLt.bind(null, endOfYesterday());
+  const ltEndOfDay = dateGt.bind(null, endOfToday());
+  // todo date is between yesterday and tomorrow
+  return filterByPredicates([gtYesterday, ltEndOfDay], todos);
 }
 
 export function filterUpcoming(todos) {
-  const isUpcomming = curry(dateGt)(new Date());
-  return filterByPredicates([notCompleted, isUpcomming], todos);
+  const isUpcomming = dateLt.bind(null, endOfToday());
+  // end of today is less than todo date
+  return filterByPredicates([isUpcomming], todos);
 }
 
 export const filterCompleted = curry(filter)(isCompleted);
