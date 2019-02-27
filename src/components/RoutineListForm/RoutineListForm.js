@@ -20,7 +20,7 @@ export default class RoutineListForm extends Component {
   onChange = (id, checked) => {
     const newRoutines = this.state.routines.map(r => {
       if (r.id === id) {
-        r.checked = checked;
+        return { ...r, checked };
       }
       return r;
     });

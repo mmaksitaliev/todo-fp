@@ -17,7 +17,7 @@ export function create(title, comment, deadline, tags = [], completed = false) {
     deadline,
     tags,
     completed,
-    date_created: currentTimeFomatted(),
+    dateCreated: currentTimeFomatted(),
   };
 }
 
@@ -69,8 +69,18 @@ export const filterCompleted = curry(filter)(isCompleted);
 
 export function filterByPathname(hash, todos) {
   const filter = hashToFilterMapping[hash];
-  return filter ? filter(todos) : todos;
+  if (filter) {
+    return filter(todos).sort(sortByCreatedDate);
+  }
+
+  return todos;
 }
+
+export const sortByCreatedDate = (a, b) => {
+  if (moment(a.dateCreated) < moment(b.dateCreated)) return 1;
+  else if (moment(a.dateCreated) > moment(b.dateCreated)) return -1;
+  return 0;
+};
 
 const hashToFilterMapping = {
   all: null,
