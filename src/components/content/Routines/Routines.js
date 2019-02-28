@@ -9,6 +9,7 @@ import RoutineForm from 'components/RoutineForm';
 export default class Routines extends Component {
   static propTypes = {
     routines: PropTypes.array.isRequired,
+    deleteRoutine: PropTypes.func.isRequired,
   };
 
   state = { formHidden: true };
@@ -28,8 +29,7 @@ export default class Routines extends Component {
   };
 
   onRemoveClick = id => {
-    // eslint-disable-next-line no-console
-    console.log('remove', id);
+    this.props.deleteRoutine(id);
   };
 
   getFormProps = () => {

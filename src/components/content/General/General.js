@@ -12,6 +12,7 @@ export default class Content extends Component {
   static propTypes = {
     todos: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
+    deleteTodo: PropTypes.func.isRequired,
   };
 
   state = { todoFormHidden: true, routineFormHidden: true };
@@ -39,8 +40,7 @@ export default class Content extends Component {
   };
 
   onRemoveClick = id => {
-    // eslint-disable-next-line no-console
-    console.log('remove todo', id);
+    this.props.deleteTodo(id);
   };
 
   renderActions = () => {
