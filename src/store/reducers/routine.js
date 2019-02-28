@@ -12,9 +12,9 @@ export const createRoutine = (state, { routine }) => {
   return state.concat(routine);
 };
 
-export const updateRoutine = (state, { id, newRoutine }) => {
+export const updateRoutine = (state, { newRoutine }) => {
   return state.map(r => {
-    if (r.id === id) return newRoutine;
+    if (r.id === newRoutine.id) return { ...newRoutine };
     return r;
   });
 };

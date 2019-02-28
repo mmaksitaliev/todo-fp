@@ -18,7 +18,28 @@ export default class Routines extends Component {
   };
 
   onFormHide = () => {
-    this.setState({ formHidden: true });
+    this.setState({ formHidden: true, routine: null });
+  };
+
+  onEditClick = routine => {
+    const newState = { routine };
+    if (this.state.formHidden) newState.formHidden = false;
+    this.setState(newState);
+  };
+
+  onRemoveClick = id => {
+    // eslint-disable-next-line no-console
+    console.log('remove', id);
+  };
+
+  getFormProps = () => {
+    const props = { onHide: this.onFormHide };
+    let { routine } = this.state;
+    if (routine) {
+      props.key = routine.id;
+      props.routine = routine;
+    }
+    return props;
   };
 
   renderActions = () => {
@@ -27,6 +48,7 @@ export default class Routines extends Component {
 
   render() {
     const { routines } = this.props;
+    let formProps = this.getFormProps();
 
     const headerActions = this.renderActions();
 
@@ -34,9 +56,13 @@ export default class Routines extends Component {
       <div className='content'>
         <Header title={'Routines'} actions={headerActions} />
 
-        {!this.state.formHidden && <RoutineForm onHide={this.onFormHide} />}
+        {!this.state.formHidden && <RoutineForm {...formProps} />}
 
-        <RoutineList routines={routines} />
+        <RoutineList
+          routines={routines}
+          onEditClick={this.onEditClick}
+          onRemoveClick={this.onRemoveClick}
+        />
       </div>
     );
   }

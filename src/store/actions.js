@@ -26,9 +26,8 @@ export const createRoutine = routine => ({
   routine,
 });
 
-export const updateRoutine = (id, newRoutine) => ({
+export const updateRoutine = newRoutine => ({
   type: ROUTINE_UPDATE,
-  id,
   newRoutine,
 });
 

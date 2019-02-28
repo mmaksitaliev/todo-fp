@@ -21,39 +21,58 @@ NewButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-export function AddRoutineButton({ size, onClick }) {
+export function AddButton({ size, icon, onClick, children }) {
   return (
     <Button
       type='secondary'
       shape='round'
-      icon='copy'
+      icon={icon}
       size={size}
       onClick={onClick}
     >
-      Add Routine
+      {children}
     </Button>
   );
 }
 
-AddRoutineButton.defaultProps = {
+AddButton.defaultProps = {
   size: 'small',
+  icon: 'copy',
+  children: 'Add',
 };
-
-AddRoutineButton.propTypes = {
-  size: PropTypes.string,
-  onClick: PropTypes.func,
-};
-export function AddButton({ onClick, children }) {
-  return (
-    <Button type='primary' icon='plus' onClick={onClick}>
-      {children || 'Add'}
-    </Button>
-  );
-}
 
 AddButton.propTypes = {
+  size: PropTypes.string,
+  icon: PropTypes.string,
   onClick: PropTypes.func,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+};
+
+export function UpdateButton({ size, icon, onClick, children }) {
+  return (
+    <Button
+      type='secondary'
+      shape='round'
+      icon={icon}
+      size={size}
+      onClick={onClick}
+    >
+      {children}
+    </Button>
+  );
+}
+
+UpdateButton.defaultProps = {
+  size: 'small',
+  icon: 'diff',
+  children: 'Update',
+};
+
+UpdateButton.propTypes = {
+  size: PropTypes.string,
+  icon: PropTypes.string,
+  onClick: PropTypes.func,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
 };
 
 export function CloseButton({ onClose, type }) {

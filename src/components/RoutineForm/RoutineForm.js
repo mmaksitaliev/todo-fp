@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input, Divider, Button } from 'antd';
+import { Card, Input, Divider } from 'antd';
 
-import { CloseButton } from 'components/Buttons';
+import { CloseButton, UpdateButton, AddButton } from 'components/Buttons';
 import * as RoutineService from 'domain/RoutineService';
 
 const { TextArea } = Input;
@@ -10,27 +10,59 @@ const { TextArea } = Input;
 export default class RoutinesForm extends Component {
   static propTypes = {
     createRoutine: PropTypes.func.isRequired,
+    updateRoutine: PropTypes.func.isRequired,
+    routine: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      comment: PropTypes.string,
+    }),
     onHide: PropTypes.func,
   };
 
-  state = {};
+  constructor(props) {
+    super(props);
+    const { routine } = props;
+
+    if (routine && routine.id)
+      this.state = {
+        id: routine.id,
+        title: routine.title,
+        comment: routine.comment,
+        updateAction: true,
+      };
+    else this.state = this.getDefaultState();
+  }
+
+  getDefaultState = () => {
+    return { id: null, title: '', comment: '', updateAction: false };
+  };
 
   onInputChange = (propName, e) => {
     this.setState({ [propName]: e.target.value });
   };
 
   onSubmit = () => {
-    const { title, description } = this.state;
-    const routine = RoutineService.create(title, description);
-    this.props.createRoutine(routine);
+    const { id, title, comment } = this.state;
+    if (id) {
+      const routine = RoutineService.update(id, title, comment);
+      this.props.updateRoutine(routine);
+    } else {
+      const routine = RoutineService.create(title, comment);
+      this.props.createRoutine(routine);
+    }
     this.props.onHide();
   };
 
   render() {
-    const { title, description } = this.state;
+    const { title, comment } = this.state;
+    const headerTitle = this.state.updateAction
+      ? 'Update Routine'
+      : 'New Routine';
+    const SubmitButton = this.state.updateAction ? UpdateButton : AddButton;
     const closeBtn = <CloseButton onClose={this.props.onHide} />;
+
     return (
-      <Card className='todo-form' title='New Routine' extra={closeBtn}>
+      <Card className='todo-form' title={headerTitle} extra={closeBtn}>
         <Input
           value={title}
           placeholder='Todo title'
@@ -40,15 +72,13 @@ export default class RoutinesForm extends Component {
           <span className='muted'>Details</span>
         </Divider>
         <TextArea
-          value={description}
-          placeholder='Todo description'
+          value={comment}
+          placeholder='Todo comment'
           autosize={{ minRows: 3 }}
-          onChange={this.onInputChange.bind(null, 'description')}
+          onChange={this.onInputChange.bind(null, 'comment')}
         />
         <div className='todo-form__submit-container'>
-          <Button type='primary' icon='plus' onClick={this.onSubmit}>
-            Add
-          </Button>
+          <SubmitButton onClick={this.onSubmit} />
         </div>
       </Card>
     );

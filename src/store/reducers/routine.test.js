@@ -18,7 +18,7 @@ it('update Routine', () => {
   const state = [{ id: 1, title: 'Learn FP' }];
 
   const todo = { id: 1, title: 'Learn FP thoroughly' };
-  let updateAction = updateRoutine(1, todo);
+  let updateAction = updateRoutine(todo);
   let nextState = routineReducer(state, updateAction);
   expect(nextState).toEqual([todo]);
 

@@ -5,7 +5,7 @@ import { Button } from 'antd';
 import TodoList from 'components/TodoList';
 import TodoForm from 'components/TodoForm';
 import RoutineListForm from 'components/RoutineListForm';
-import { AddRoutineButton, NewButton } from 'components/Buttons';
+import { AddButton, NewButton } from 'components/Buttons';
 import Header from '../Header';
 
 export default class Content extends Component {
@@ -32,18 +32,40 @@ export default class Content extends Component {
     this.setState({ routineFormHidden: true });
   };
 
+  onEditClick = todo => {
+    const newState = { todo };
+    if (this.state.todoFormHidden) newState.todoFormHidden = false;
+    this.setState(newState);
+  };
+
+  onRemoveClick = id => {
+    // eslint-disable-next-line no-console
+    console.log('remove todo', id);
+  };
+
   renderActions = () => {
     return (
       <Button.Group>
-        <AddRoutineButton onClick={this.onRoutineFormShow} />
+        <AddButton onClick={this.onRoutineFormShow}>Add Routine</AddButton>
         <NewButton onClick={this.onTodoFormShow}>New Todo</NewButton>
       </Button.Group>
     );
   };
 
+  getFormProps = () => {
+    const props = { onHide: this.onTodoFormHide };
+    let { todo } = this.state;
+    if (todo) {
+      props.key = todo.id;
+      props.todo = todo;
+    }
+    return props;
+  };
+
   render() {
     const { todos, title } = this.props;
     const { todoFormHidden, routineFormHidden } = this.state;
+    const formProps = this.getFormProps();
 
     const headerActions = this.renderActions();
 
@@ -51,13 +73,17 @@ export default class Content extends Component {
       <div className='content'>
         <Header title={title} actions={headerActions} />
 
-        {!todoFormHidden && <TodoForm onHide={this.onTodoFormHide} />}
+        {!todoFormHidden && <TodoForm {...formProps} />}
 
         {!routineFormHidden && (
           <RoutineListForm onHide={this.onRoutineFormHide} />
         )}
 
-        <TodoList todos={todos} />
+        <TodoList
+          todos={todos}
+          onEditClick={this.onEditClick}
+          onRemoveClick={this.onRemoveClick}
+        />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, List } from 'antd';
-import Header from 'components/HeaderWithCheckbox';
+import { Card, List, Checkbox } from 'antd';
+import Header from 'components/ListItemHeader';
 import { AddButton, CloseButton } from 'components/Buttons';
 import { createFromRoutine } from 'domain/TodoService';
 
@@ -17,10 +17,10 @@ export default class RoutineListForm extends Component {
     this.state = { routines: [...props.routines] };
   }
 
-  onChange = (id, checked) => {
+  onChange = id => {
     const newRoutines = this.state.routines.map(r => {
       if (r.id === id) {
-        return { ...r, checked };
+        return { ...r, checked: !r.checked };
       }
       return r;
     });
@@ -46,18 +46,19 @@ export default class RoutineListForm extends Component {
           className='todo__list'
           itemLayout='horizontal'
           dataSource={routines}
-          renderItem={routine => (
-            <List.Item>
+          renderItem={({ id, comment, title, checked }) => (
+            <List.Item
+              actions={[
+                <Checkbox
+                  key={id}
+                  checked={checked}
+                  onChange={() => this.onChange(id)}
+                />,
+              ]}
+            >
               <List.Item.Meta
-                title={
-                  <Header
-                    id={routine.id}
-                    title={routine.title}
-                    checked={routine.checked}
-                    onChange={this.onChange}
-                  />
-                }
-                description={routine.description}
+                title={<Header title={title} />}
+                description={comment}
               />
             </List.Item>
           )}
