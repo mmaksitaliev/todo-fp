@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 
 import TodoList from 'components/TodoList';
 import TodoForm from 'components/TodoForm';
-import RoutineListForm from 'components/RoutineListForm';
+import RoutineSelectForm from 'components/RoutineSelectForm';
 import { AddButton, NewButton } from 'components/Buttons';
 import Header from '../Header';
 
@@ -34,13 +34,12 @@ export default class Content extends Component {
   };
 
   onEditClick = todo => {
-    const newState = { todo };
-    if (this.state.todoFormHidden) newState.todoFormHidden = false;
-    this.setState(newState);
+    this.setState({ todo, todoFormHidden: false });
   };
 
   onRemoveClick = id => {
     this.props.deleteTodo(id);
+    message.success('Successfully deleted');
   };
 
   renderActions = () => {
@@ -76,7 +75,7 @@ export default class Content extends Component {
         {!todoFormHidden && <TodoForm {...formProps} />}
 
         {!routineFormHidden && (
-          <RoutineListForm onHide={this.onRoutineFormHide} />
+          <RoutineSelectForm onHide={this.onRoutineFormHide} />
         )}
 
         <TodoList

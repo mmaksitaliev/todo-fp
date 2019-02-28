@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { message } from 'antd';
 
 import { NewButton } from 'components/Buttons';
 import RoutineList from 'components/RoutineList';
@@ -23,13 +24,12 @@ export default class Routines extends Component {
   };
 
   onEditClick = routine => {
-    const newState = { routine };
-    if (this.state.formHidden) newState.formHidden = false;
-    this.setState(newState);
+    this.setState({ routine, formHidden: false });
   };
 
   onRemoveClick = id => {
     this.props.deleteRoutine(id);
+    message.success('Successfully deleted');
   };
 
   getFormProps = () => {

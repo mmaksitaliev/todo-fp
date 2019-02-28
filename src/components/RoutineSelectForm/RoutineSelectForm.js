@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, List, Checkbox } from 'antd';
+import { Card, List, Checkbox, message } from 'antd';
 import Header from 'components/ListItemHeader';
 import { AddButton, CloseButton } from 'components/Buttons';
 import { createFromRoutine } from 'domain/TodoService';
@@ -35,6 +35,7 @@ export default class RoutineListForm extends Component {
       .map(createFromRoutine);
     this.props.createTodos(newTodos);
     this.props.onHide();
+    message.success('Successfully updated');
   };
 
   render() {

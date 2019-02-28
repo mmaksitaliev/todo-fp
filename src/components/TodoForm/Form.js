@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input, DatePicker, Divider, Icon } from 'antd';
+import { Card, Input, DatePicker, Divider, Icon, message } from 'antd';
 import moment from 'moment';
 
 import * as TodoService from 'domain/TodoService';
@@ -70,6 +70,7 @@ export default class Form extends Component {
       this.props.createTodo(newTodo);
     }
     this.props.onHide();
+    message.success('Successfully updated');
   };
 
   renderSuffix = () => {

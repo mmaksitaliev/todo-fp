@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createTodos } from 'store/actions';
-import RoutineListForm from './RoutineListForm';
+import RoutineSelectForm from './RoutineSelectForm';
 
 const mapStateToProps = state => ({
   routines: state.routines,
@@ -13,4 +13,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RoutineListForm);
+)(RoutineSelectForm);

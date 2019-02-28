@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, Icon } from 'antd';
+import { List, Icon, Popconfirm } from 'antd';
 import Header from 'components/ListItemHeader';
 import { DangerIcon } from 'components/Icons';
 
@@ -30,11 +30,15 @@ RoutineList.propTypes = {
 function RoutineItem({ routine, onEditClick, onRemoveClick }) {
   const actions = [
     <Icon key='edit-icon' type='edit' onClick={() => onEditClick(routine)} />,
-    <DangerIcon
-      key='delete-icon'
-      type='delete'
-      onClick={() => onRemoveClick(routine.id)}
-    />,
+    <Popconfirm
+      key='delete-confirm'
+      title='Are you sure delete this routine?'
+      onConfirm={() => onRemoveClick(routine.id)}
+      okText='Yes'
+      cancelText='No'
+    >
+      <DangerIcon type='delete' />
+    </Popconfirm>,
   ];
   return (
     <List.Item actions={actions}>

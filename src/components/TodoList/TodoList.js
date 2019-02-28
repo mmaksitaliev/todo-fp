@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, Checkbox, Icon } from 'antd';
+import { List, Checkbox, Icon, Popconfirm } from 'antd';
 import Header from 'components/ListItemHeader';
 import { DangerIcon } from 'components/Icons';
 
@@ -42,11 +42,15 @@ function TodoItem({ todo, toggleComplete, onEditClick, onRemoveClick }) {
       onChange={() => toggleComplete(todo.id)}
     />,
     <Icon key='edit-icon' type='edit' onClick={() => onEditClick(todo)} />,
-    <DangerIcon
-      key='delete-icon'
-      type='delete'
-      onClick={() => onRemoveClick(todo.id)}
-    />,
+    <Popconfirm
+      key='delete-confirm'
+      title='Are you sure delete this todo?'
+      onConfirm={() => onRemoveClick(todo.id)}
+      okText='Yes'
+      cancelText='No'
+    >
+      <DangerIcon type='delete' />
+    </Popconfirm>,
   ];
   return (
     <List.Item actions={actions}>
