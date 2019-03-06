@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, message } from 'antd';
 
@@ -7,83 +7,73 @@ import TodoForm from 'components/TodoForm';
 import RoutineSelectForm from 'components/RoutineSelectForm';
 import { AddButton, NewButton } from 'components/Buttons';
 import Header from '../Header';
+import { useDoubleForm } from 'hooks/form';
 
-export default class Content extends Component {
-  static propTypes = {
-    todos: PropTypes.array.isRequired,
-    title: PropTypes.string.isRequired,
-    deleteTodo: PropTypes.func.isRequired,
+export default function General(props) {
+  const [
+    todoFormHidden,
+    onTodoFormShow,
+    onTodoFormHide,
+    routineFormHidden,
+    onRoutineFormShow,
+    onRoutineFormHide,
+  ] = useDoubleForm();
+
+  const [todo, setTodo] = useState();
+
+  const onEditClick = todo => {
+    setTodo(todo);
+    onTodoFormShow();
   };
 
-  state = { todoFormHidden: true, routineFormHidden: true };
-
-  onTodoFormShow = () => {
-    this.setState({ todoFormHidden: false, routineFormHidden: true });
-  };
-
-  onTodoFormHide = () => {
-    this.setState({ todoFormHidden: true });
-  };
-
-  onRoutineFormShow = () => {
-    this.setState({ routineFormHidden: false, todoFormHidden: true });
-  };
-
-  onRoutineFormHide = () => {
-    this.setState({ routineFormHidden: true });
-  };
-
-  onEditClick = todo => {
-    this.setState({ todo, todoFormHidden: false });
-  };
-
-  onRemoveClick = id => {
-    this.props.deleteTodo(id);
+  const onRemoveClick = id => {
+    props.deleteTodo(id);
     message.success('Successfully deleted');
   };
 
-  renderActions = () => {
-    return (
-      <Button.Group>
-        <AddButton onClick={this.onRoutineFormShow}>Add Routine</AddButton>
-        <NewButton onClick={this.onTodoFormShow}>New Todo</NewButton>
-      </Button.Group>
-    );
+  const formProps = {
+    todo,
+    onHide: () => {
+      onTodoFormHide();
+      setTodo();
+    },
   };
 
-  getFormProps = () => {
-    const props = { onHide: this.onTodoFormHide };
-    let { todo } = this.state;
-    if (todo) {
-      props.key = todo.id;
-      props.todo = todo;
-    }
-    return props;
-  };
+  const actionProps = { onTodoFormShow, onRoutineFormShow };
 
-  render() {
-    const { todos, title } = this.props;
-    const { todoFormHidden, routineFormHidden } = this.state;
-    const formProps = this.getFormProps();
+  return (
+    <div className='content'>
+      <Header title={props.title} actions={<Actions {...actionProps} />} />
 
-    const headerActions = this.renderActions();
+      {!todoFormHidden && <TodoForm {...formProps} />}
 
-    return (
-      <div className='content'>
-        <Header title={title} actions={headerActions} />
+      {!routineFormHidden && <RoutineSelectForm onHide={onRoutineFormHide} />}
 
-        {!todoFormHidden && <TodoForm {...formProps} />}
-
-        {!routineFormHidden && (
-          <RoutineSelectForm onHide={this.onRoutineFormHide} />
-        )}
-
-        <TodoList
-          todos={todos}
-          onEditClick={this.onEditClick}
-          onRemoveClick={this.onRemoveClick}
-        />
-      </div>
-    );
-  }
+      <TodoList
+        todos={props.todos}
+        onEditClick={onEditClick}
+        onRemoveClick={onRemoveClick}
+      />
+    </div>
+  );
 }
+
+General.propTypes = {
+  todos: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
+};
+
+const Actions = ({ onRoutineFormShow, onTodoFormShow }) => {
+  return (
+    <Button.Group>
+      <AddButton onClick={onRoutineFormShow}>Add Routine</AddButton>
+      <NewButton onClick={onTodoFormShow}>New Todo</NewButton>
+    </Button.Group>
+  );
+};
+
+Actions.propTypes = {
+  onRoutineFormShow: PropTypes.func.isRequired,
+  onTodoFormShow: PropTypes.func.isRequired,
+};
