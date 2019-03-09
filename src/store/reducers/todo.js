@@ -5,10 +5,8 @@ import {
   TODO_DELETE,
   TODO_TOGGLE_COMPLETE,
 } from 'store/actions';
-import { curry, equalBy, createReducer, fromNow } from 'utils';
+import { createReducer, fromNow } from 'utils';
 import * as TodoService from 'domain/TodoService';
-
-const equalById = curry(equalBy)('id');
 
 export const initialState = [
   TodoService.create('Have fun [YESTERDAY]', null, fromNow(-2), null, true),
@@ -35,10 +33,10 @@ function toggleComplete(todos, { id }) {
 }
 
 function updateTodo(todos, { todo: toUpdate }) {
-  const newTodos = todos.slice();
-  const index = newTodos.findIndex(equalById(toUpdate.id));
-  if (index !== -1) newTodos[index] = toUpdate;
-  return newTodos;
+  return todos.map(todo => {
+    if (todo.id === toUpdate.id) return toUpdate;
+    return todo;
+  });
 }
 
 function deleteTodo(todos, { id }) {

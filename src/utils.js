@@ -2,6 +2,18 @@ import moment from 'moment';
 
 const FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
+export function createReducer(initialState, handlers) {
+  return (state = initialState, action) => {
+    const reducer = handlers[action.type];
+    if (reducer) return reducer(state, action);
+    return state;
+  };
+}
+
+export function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 export function isNill(value) {
   return value === null || value === undefined || value === '';
 }
@@ -81,14 +93,28 @@ export function updateProp(prop, obj, value) {
   return newObj;
 }
 
-export function createReducer(initialState, handlers) {
-  return (state = initialState, action) => {
-    const reducer = handlers[action.type];
-    if (reducer) return reducer(state, action);
-    return state;
+export function dateGt(date1, date2) {
+  // checks date1 > deadline
+  const mDate1 = date1 && moment(date1);
+  const mDate2 = date2 && moment(date2);
+
+  return mDate1 && mDate2 && mDate1 > mDate2;
+}
+
+export function dateLt(date1, date2) {
+  // checks date1 > deadline
+  const mDate1 = date1 && moment(date1);
+  const mDate2 = date2 && moment(date2);
+
+  return mDate1 && mDate2 && mDate1 < mDate2;
+}
+
+export function sortByDate(dateName) {
+  return (a, b) => {
+    if (moment(a[dateName]) < moment(b[dateName])) return 1;
+    else if (moment(a[dateName]) > moment(b[dateName])) return -1;
+    return 0;
   };
 }
 
-export function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+export const sortByCreatedDate = sortByDate('dateCreated');

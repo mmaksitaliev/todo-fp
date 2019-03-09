@@ -1,13 +1,14 @@
 import { v1 } from 'uuid';
 import {
-  curry,
-  allTrue,
   currentTimeFomatted,
   endOfToday,
   endOfYesterday,
   formatDate,
+  dateGt,
+  dateLt,
+  sortByCreatedDate,
 } from 'utils';
-import moment from 'moment';
+import * as R from 'ramda';
 
 export function create(title, comment, deadline, tags = [], completed = false) {
   title = title || 'Default title';
@@ -32,57 +33,33 @@ export function update(oldId, todo) {
   };
 }
 
-export const createFromRoutine = routine => {
+export function createFromRoutine(routine) {
   const deadline = currentTimeFomatted();
   return create(routine.title, routine.comment, deadline);
-};
-
-const isCompleted = ({ completed }) => completed;
-
-function filter(fn, collection) {
-  return collection.filter(fn);
 }
-
-function filterByPredicates(predicates, collection) {
-  return collection.filter(allTrue(predicates));
-}
-
-const dateGt = (date1, { deadline: date2 }) => {
-  // checks date1 > deadline
-  const mDate1 = date1 && moment(date1);
-  const mDate2 = date2 && moment(date2);
-
-  return mDate1 && mDate2 && mDate1 > mDate2;
-};
-
-const dateLt = (date1, { deadline: date2 }) => {
-  // checks date1 < deadline
-  const mDate1 = date1 && moment(date1);
-  const mDate2 = date2 && moment(date2);
-
-  return mDate1 && mDate2 && mDate1 < mDate2;
-};
 
 export function filterTodays(todos) {
-  const gtYesterday = dateLt.bind(null, endOfYesterday());
-  const ltEndOfDay = dateGt.bind(null, endOfToday());
+  const gtYesterday = R.partial(todoDateLt, [endOfYesterday()]);
+  const ltEndOfDay = R.partial(todoDateGt, [endOfToday()]);
+  const isTodays = R.allPass([gtYesterday, ltEndOfDay]);
   // todo date is between yesterday and tomorrow
-  const byDateCreated = sortByDate('dateCreated');
-  return filterByPredicates([gtYesterday, ltEndOfDay], todos).sort(
-    byDateCreated
-  );
+  return R.pipe(
+    R.filter(isTodays),
+    R.sort(sortByCreatedDate)
+  )(todos);
 }
 
 export function filterUpcoming(todos) {
-  const isUpcomming = dateLt.bind(null, endOfToday());
+  const isUpcomming = R.partial(todoDateLt, [endOfToday()]);
   // end of today is less than todo date
-  return filterByPredicates([isUpcomming], todos);
+  return R.pipe(
+    R.filter(isUpcomming),
+    R.sort(sortByCreatedDate)
+  )(todos);
 }
 
-export const filterCompleted = curry(filter)(isCompleted);
-
-export function filterByPathname(hash, todos) {
-  const filter = hashToFilterMapping[hash];
+export function filterByPathname(pathname, todos) {
+  const filter = pathnameFilterMapping[pathname];
   if (filter) {
     return filter(todos);
   }
@@ -90,15 +67,19 @@ export function filterByPathname(hash, todos) {
   return todos;
 }
 
-export const sortByDate = propName => {
-  return (a, b) => {
-    if (moment(a[propName]) < moment(b[propName])) return 1;
-    else if (moment(a[propName]) > moment(b[propName])) return -1;
-    return 0;
-  };
-};
+const isCompleted = R.propEq('completed', true);
 
-const hashToFilterMapping = {
+export const filterCompleted = R.filter(isCompleted);
+
+function todoDateGt(date, todo) {
+  return dateGt(date, todo.deadline);
+}
+
+function todoDateLt(date, todo) {
+  return dateLt(date, todo.deadline);
+}
+
+const pathnameFilterMapping = {
   all: null,
   today: filterTodays,
   upcoming: filterUpcoming,
