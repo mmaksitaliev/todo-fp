@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { createRoutine, updateRoutine } from 'store/actions';
+import { createRoutine, updateRoutine } from '../../store/actions/routine';
 import RoutinesForm from './RoutineForm';
 
 const mapDispatchToProps = dispatch =>

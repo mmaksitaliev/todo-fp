@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { deleteRoutine } from 'store/actions';
+import { deleteRoutine } from '../../../store/actions/routine';
 import Routines from './Routines';
 
 const mapStateToProps = state => ({

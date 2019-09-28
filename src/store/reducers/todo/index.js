@@ -4,7 +4,7 @@ import {
   TODO_UPDATE,
   TODO_DELETE,
   TODO_TOGGLE_COMPLETE,
-} from 'store/actions';
+} from '../../actions/todo';
 import { createReducer, fromNow } from 'utils';
 import * as TodoService from 'domain/TodoService';
 

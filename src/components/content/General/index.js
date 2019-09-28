@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose, bindActionCreators } from 'redux';
 
-import { deleteTodo } from 'store/actions';
+import { deleteTodo } from '../../../store/actions/todo';
 import { filterByPathname } from 'domain/TodoService';
 import { capitalize } from 'utils';
 import General from './General';
