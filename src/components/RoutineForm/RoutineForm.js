@@ -8,8 +8,13 @@ import { useStateObject } from 'hooks/form';
 
 const { TextArea } = Input;
 
-export default function RoutineForm(props) {
-  const [routine, onPropChange, setRoutine] = useStateObject({
+export default function RoutineForm({
+  routine,
+  updateRoutine,
+  createRoutine,
+  onHide,
+}) {
+  const [newRoutine, onPropChange, setRoutine] = useStateObject({
     id: null,
     title: '',
     comment: '',
@@ -17,35 +22,33 @@ export default function RoutineForm(props) {
   const [updateAction, setUpdateAction] = useState(false);
 
   useEffect(() => {
-    const { routine } = props;
-
     if (routine && routine.id) {
       setRoutine({ ...routine });
       setUpdateAction(true);
     }
-  }, [props.routine]);
+  }, [routine, setRoutine]);
 
   const onInputChange = (propName, e) => {
     onPropChange(propName, e.target.value);
   };
 
   const onSubmit = () => {
-    const { id, title, comment } = routine;
+    const { id, title, comment } = newRoutine;
     if (updateAction) {
       const routine = RoutineService.update(id, title, comment);
-      props.updateRoutine(routine);
+      updateRoutine(routine);
     } else {
       const routine = RoutineService.create(title, comment);
-      props.createRoutine(routine);
+      createRoutine(routine);
     }
-    props.onHide();
+    onHide();
     message.success('Successfully created a new Routine');
   };
 
-  const { title, comment } = routine;
+  const { title, comment } = newRoutine;
   const headerTitle = updateAction ? 'Update Routine' : 'New Routine';
   const SubmitButton = updateAction ? UpdateButton : AddButton;
-  const closeBtn = <CloseButton onClose={props.onHide} />;
+  const closeBtn = <CloseButton onClose={onHide} />;
 
   return (
     <Card className='todo-form' title={headerTitle} extra={closeBtn}>

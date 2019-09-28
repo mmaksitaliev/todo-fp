@@ -10,9 +10,14 @@ import { useStateObject } from 'hooks/form';
 
 const { TextArea } = Input;
 
-export default function Form(props) {
+export default function Form({
+  todo,
+  updateTodo,
+  createTodo,
+  onHide,
+}) {
   const currentTime = getCurrentTime();
-  const [todo, onPropChange, setTodo] = useStateObject({
+  const [tempTodo, onPropChange, setTodo] = useStateObject({
     title: 'default',
     comment: '',
     deadline: endOfToday(),
@@ -20,13 +25,12 @@ export default function Form(props) {
   const [updateAction, setUpdateAction] = useState(false);
 
   useEffect(() => {
-    const { todo } = props;
     if (todo && todo.id) {
       const deadline = todo.deadline ? moment(todo.deadline) : null;
       setTodo({ ...todo, deadline });
       setUpdateAction(true);
     }
-  }, [props.todo]);
+  }, [todo, setTodo]);
 
   const clearTitle = () => onPropChange('title', '');
 
@@ -40,24 +44,24 @@ export default function Form(props) {
 
   const onSubmit = () => {
     if (updateAction) {
-      const updated = TodoService.update(todo.id, todo);
-      props.updateTodo(updated);
+      const updated = TodoService.update(tempTodo.id, tempTodo);
+      updateTodo(updated);
     } else {
       const newTodo = TodoService.create(
-        todo.title,
-        todo.comment,
-        todo.deadline
+        tempTodo.title,
+        tempTodo.comment,
+        tempTodo.deadline
       );
-      props.createTodo(newTodo);
+      createTodo(newTodo);
     }
-    props.onHide();
+    onHide();
     message.success('Successfully updated');
   };
 
-  const { title, comment, deadline } = todo;
+  const { title, comment, deadline } = tempTodo;
   const headerTitle = updateAction ? 'Update Todo' : 'New Todo';
   const SubmitButton = updateAction ? UpdateButton : AddButton;
-  const closeBtn = <CloseButton onClose={props.onHide} />;
+  const closeBtn = <CloseButton onClose={onHide} />;
   const dateValueProp = deadline ? { value: deadline } : {};
   const suffixProps = { title, clearTitle };
   return (
