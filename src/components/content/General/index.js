@@ -2,10 +2,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose, bindActionCreators } from 'redux';
 
-import { deleteTodo } from '../../../store/actions/todo';
 import { filterByPathname } from 'domain/TodoService';
 import { capitalize } from 'utils';
-import General from './General';
+
+import { deleteTodo } from '../../../store/actions/todo';
+import { GeneralFC } from './General';
 
 const mapStateToProps = (state, props) => {
   let { pathname } = props.location;
@@ -29,4 +30,4 @@ const composed = compose(
   )
 );
 
-export default composed(General);
+export const General =  composed(GeneralFC);

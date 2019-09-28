@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 import { createTodos } from '../../store/actions/todo';
-import RoutineSelectForm from './RoutineSelectForm';
+import { RoutineSelectFormFC } from './RoutineSelectForm';
 
 const mapStateToProps = state => ({
   routines: state.routines,
@@ -10,7 +11,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ createTodos }, dispatch);
 
-export default connect(
+export const RoutineSelectForm = connect(
   mapStateToProps,
   mapDispatchToProps
-)(RoutineSelectForm);
+)(RoutineSelectFormFC);

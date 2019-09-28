@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card, List, Checkbox, message } from 'antd';
-import Header from 'components/ListItemHeader';
-import { AddButton, CloseButton } from 'components/Buttons';
-import { createFromRoutine } from 'domain/TodoService';
 
-export default function RoutineSelectForm(props) {
+import { createFromRoutine } from 'domain/TodoService';
+import { AddButton, CloseButton } from 'components/Buttons';
+import { Header } from 'components/ListItemHeader';
+
+export function RoutineSelectFormFC(props) {
   const [routines, setRoutines] = useState([...props.routines]);
 
   const onChange = id => {
@@ -59,7 +60,7 @@ export default function RoutineSelectForm(props) {
   );
 }
 
-RoutineSelectForm.propTypes = {
+RoutineSelectFormFC.propTypes = {
   routines: PropTypes.array.isRequired,
   createTodos: PropTypes.func.isRequired,
   onHide: PropTypes.func.isRequired,

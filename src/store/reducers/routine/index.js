@@ -1,6 +1,11 @@
 import { createReducer } from 'utils';
-import { ROUTINE_CREATE, ROUTINE_UPDATE, ROUTINE_DELETE } from '../../actions/routine';
 import { create } from 'domain/RoutineService';
+
+import {
+  ROUTINE_CREATE,
+  ROUTINE_UPDATE,
+  ROUTINE_DELETE,
+} from '../../actions/routine';
 
 export const initialState = [
   create('Clean out inbox'),
@@ -29,4 +34,4 @@ const handlers = {
   [ROUTINE_DELETE]: deleteRoutine,
 };
 
-export default createReducer(initialState, handlers);
+export const routines = createReducer(initialState, handlers);

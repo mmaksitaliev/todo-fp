@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Sidebar from 'components/Sidebar';
-import GeneralContent from 'components/content/General';
-import RoutinesContent from 'components/content/Routines';
-import { routes } from 'App';
 
-export default class MainPage extends Component {
+import { routes } from 'App';
+import { Sidebar } from 'components/Sidebar';
+import { General } from 'components/content/General';
+import { Routines } from 'components/content/Routines';
+
+export class MainPage extends Component {
   render() {
     const { pathname } = this.props.location;
-    const Content = pathname === '/routines' ? RoutinesContent : GeneralContent;
+    const Content = pathname === '/routines' ? Routines : General;
     return (
       <main className='app'>
         <Sidebar links={routes} />

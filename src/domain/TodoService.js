@@ -1,4 +1,6 @@
 import { v1 } from 'uuid';
+import * as R from 'ramda';
+
 import {
   currentTimeFomatted,
   endOfToday,
@@ -8,7 +10,6 @@ import {
   dateLt,
   sortByCreatedDate,
 } from 'utils';
-import * as R from 'ramda';
 
 export function create(title, comment, deadline, tags = [], completed = false) {
   title = title || 'Default title';

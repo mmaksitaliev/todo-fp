@@ -5,6 +5,6 @@ Header.propTypes = {
   children: PropTypes.object.isRequired,
 };
 
-export default function Header({ children }) {
+export function Header({ children }) {
   return <div className='header spacebtw'>{children}</div>;
 }

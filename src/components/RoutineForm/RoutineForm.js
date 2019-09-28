@@ -8,7 +8,7 @@ import { useStateObject } from 'hooks/form';
 
 const { TextArea } = Input;
 
-export default function RoutineForm({
+export function RoutineFormFC({
   routine,
   updateRoutine,
   createRoutine,
@@ -73,7 +73,7 @@ export default function RoutineForm({
   );
 }
 
-RoutineForm.propTypes = {
+RoutineFormFC.propTypes = {
   createRoutine: PropTypes.func.isRequired,
   updateRoutine: PropTypes.func.isRequired,
   routine: PropTypes.shape({

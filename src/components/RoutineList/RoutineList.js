@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { List, Icon, Popconfirm } from 'antd';
-import Header from 'components/ListItemHeader';
+
+import { Header } from 'components/ListItemHeader';
 import { DangerIcon } from 'components/Icons';
 
-export default function RoutineList({ routines, onEditClick, onRemoveClick }) {
+export function RoutineList({ routines, onEditClick, onRemoveClick }) {
   return (
     <List
       className='todo__list'

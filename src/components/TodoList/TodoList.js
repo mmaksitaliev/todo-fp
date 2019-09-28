@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { List, Checkbox, Icon, Popconfirm } from 'antd';
-import Header from 'components/ListItemHeader';
+
+import { Header } from 'components/ListItemHeader';
 import { DangerIcon } from 'components/Icons';
 
-export default function TodoList({
+export function TodoListFC({
   todos,
   toggleComplete,
   onEditClick,
@@ -27,7 +28,7 @@ export default function TodoList({
   );
 }
 
-TodoList.propTypes = {
+TodoListFC.propTypes = {
   todos: PropTypes.array.isRequired,
   toggleComplete: PropTypes.func.isRequired,
   onEditClick: PropTypes.func,

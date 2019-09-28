@@ -7,7 +7,7 @@ Nav.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-function Nav({ path, label }) {
+export function Nav({ path, label }) {
   return (
     <li>
       <NavLink to={path} className='sidebar__link' activeClassName='active'>
@@ -16,5 +16,3 @@ function Nav({ path, label }) {
     </li>
   );
 }
-
-export default Nav;

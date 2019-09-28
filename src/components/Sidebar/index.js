@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
-import Sidebar from './Sidebar';
+
+import { SidebarFC } from './Sidebar';
 
 const mapStateToProps = state => ({
   routes: state.routes,
 });
 
-export default connect(mapStateToProps)(Sidebar);
+export const Sidebar =  connect(mapStateToProps)(SidebarFC);

@@ -3,9 +3,9 @@ import { Provider } from 'react-redux';
 import { faCheck, faCoffee, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
-import Routes from 'components/Routes';
-import MainPage from 'pages/MainPage';
-import store from './store';
+import { Routes } from 'components/Routes';
+import { MainPage } from 'pages/MainPage';
+import { store } from './store';
 
 library.add(faCheck, faCoffee, faPlus);
 
@@ -17,7 +17,7 @@ export const routes = [
   { path: '/routines', label: 'Routines', component: MainPage },
 ];
 
-class App extends Component {
+export class App extends Component {
   render() {
     return (
       <Provider store={store}>
@@ -26,5 +26,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;

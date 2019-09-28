@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { Card, Input, DatePicker, Divider, Icon, message } from 'antd';
 import moment from 'moment';
 
-import * as TodoService from 'domain/TodoService';
-import { AddButton, UpdateButton, CloseButton } from 'components/Buttons';
 import { currentTime as getCurrentTime, endOfToday } from 'utils';
+import * as TodoService from 'domain/TodoService';
 import { useStateObject } from 'hooks/form';
+import { AddButton, UpdateButton, CloseButton } from 'components/Buttons';
 
 const { TextArea } = Input;
 
-export default function Form({
+export function FormFC({
   todo,
   updateTodo,
   createTodo,
@@ -97,7 +97,7 @@ export default function Form({
   );
 }
 
-Form.propTypes = {
+FormFC.propTypes = {
   createTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
   onHide: PropTypes.func.isRequired,

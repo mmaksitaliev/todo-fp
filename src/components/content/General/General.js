@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, message } from 'antd';
 
-import TodoList from 'components/TodoList';
-import TodoForm from 'components/TodoForm';
-import RoutineSelectForm from 'components/RoutineSelectForm';
+import { RoutineSelectForm } from 'components/RoutineSelectForm';
 import { AddButton, NewButton } from 'components/Buttons';
-import Header from '../Header';
+import { TodoList } from 'components/TodoList';
+import { TodoForm } from 'components/TodoForm';
 import { useDoubleForm } from 'hooks/form';
 
-export default function General(props) {
+import { Header } from '../Header';
+
+export function GeneralFC(props) {
   const [
     todoFormHidden,
     onTodoFormShow,
@@ -58,7 +59,7 @@ export default function General(props) {
   );
 }
 
-General.propTypes = {
+GeneralFC.propTypes = {
   todos: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
   deleteTodo: PropTypes.func.isRequired,

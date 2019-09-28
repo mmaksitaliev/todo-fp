@@ -6,7 +6,7 @@ Header.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
 };
 
-export default function Header({ title, children }) {
+export function Header({ title, children }) {
   return (
     <div className='todo__header'>
       <span>{title}</span>

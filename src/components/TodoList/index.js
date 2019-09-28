@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 import { toggleComplete } from '../../store/actions/todo';
-import TodoList from './TodoList';
+import { TodoListFC } from './TodoList';
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ toggleComplete }, dispatch);
 }
 
-export default connect(
+export const TodoList = connect(
   null,
   mapDispatchToProps
-)(TodoList);
+)(TodoListFC);

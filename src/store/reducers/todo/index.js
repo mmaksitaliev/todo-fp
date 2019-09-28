@@ -1,3 +1,6 @@
+import { createReducer, fromNow } from 'utils';
+import * as TodoService from 'domain/TodoService';
+
 import {
   TODO_CREATE,
   TODO_CREATE_BATCH,
@@ -5,8 +8,6 @@ import {
   TODO_DELETE,
   TODO_TOGGLE_COMPLETE,
 } from '../../actions/todo';
-import { createReducer, fromNow } from 'utils';
-import * as TodoService from 'domain/TodoService';
 
 export const initialState = [
   TodoService.create('Have fun [YESTERDAY]', null, fromNow(-2), null, true),
@@ -51,4 +52,4 @@ const handlers = {
   [TODO_TOGGLE_COMPLETE]: toggleComplete,
 };
 
-export default createReducer(initialState, handlers);
+export const todos = createReducer(initialState, handlers);

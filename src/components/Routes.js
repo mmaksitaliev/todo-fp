@@ -12,7 +12,7 @@ Routes.propTypes = {
   defRouteIndex: PropTypes.number.isRequired,
 };
 
-export default function Routes({ routes, defRouteIndex }) {
+export function Routes({ routes, defRouteIndex }) {
   const defaultPath = routes[defRouteIndex].path;
   return (
     <Router>

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { createRoutine, updateRoutine } from '../../store/actions/routine';
-import RoutinesForm from './RoutineForm';
+import { RoutineFormFC } from './RoutineForm';
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -13,7 +13,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(
+export const RoutineForm = connect(
   null,
   mapDispatchToProps
-)(RoutinesForm);
+)(RoutineFormFC);

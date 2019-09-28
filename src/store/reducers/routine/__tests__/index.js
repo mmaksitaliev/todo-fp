@@ -1,5 +1,5 @@
 import { createRoutine, deleteRoutine, updateRoutine } from '../../../actions/routine';
-import routineReducer, { initialState } from '../index';
+import { routines as routineReducer, initialState } from '../index';
 
 it('Should return the initial state as no action type specified', () => {
   const action = {};

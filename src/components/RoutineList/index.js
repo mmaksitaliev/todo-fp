@@ -1,1 +1,1 @@
-export { default } from './RoutineList';
+export * from './RoutineList';

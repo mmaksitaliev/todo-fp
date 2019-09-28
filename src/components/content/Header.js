@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Header({ title, actions }) {
+export function Header({ title, actions }) {
   return (
     <div className='content__header'>
       <h3 className='content__title'>{title}</h3>
@@ -14,5 +14,3 @@ Header.propTypes = {
   title: PropTypes.string.isRequired,
   actions: PropTypes.element,
 };
-
-export default Header;
