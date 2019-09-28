@@ -2,10 +2,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose, bindActionCreators } from 'redux';
 
-import { filterByPathname } from 'domain/TodoService';
 import { capitalize } from 'utils';
+import { filterByPathname } from 'domain/TodoService';
+import { deleteTodo } from 'store/actions/todo';
 
-import { deleteTodo } from '../../../store/actions/todo';
 import { GeneralFC } from './General';
 
 const mapStateToProps = (state, props) => {

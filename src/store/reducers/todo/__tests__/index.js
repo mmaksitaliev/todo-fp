@@ -1,5 +1,5 @@
-import { createTodo, deleteTodo, updateTodo } from '../../../actions/todo';
-import { todos as todoReducer, initialState } from '../index';
+import { createTodo, deleteTodo, updateTodo } from 'store/actions/todo';
+import { todos as todoReducer, initialState } from '..';
 
 it('Should return the initial state as no action type specified', () => {
   const action = {};

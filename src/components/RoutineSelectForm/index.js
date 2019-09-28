@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { createTodos } from '../../store/actions/todo';
+import { createTodos } from 'store/actions/todo';
 import { RoutineSelectFormFC } from './RoutineSelectForm';
 
 const mapStateToProps = state => ({

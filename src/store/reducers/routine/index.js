@@ -5,7 +5,7 @@ import {
   ROUTINE_CREATE,
   ROUTINE_UPDATE,
   ROUTINE_DELETE,
-} from '../../actions/routine';
+} from 'store/actions/routine';
 
 export const initialState = [
   create('Clean out inbox'),

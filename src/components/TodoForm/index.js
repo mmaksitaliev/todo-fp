@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { createTodo, updateTodo } from '../../store/actions/todo';
+import { createTodo, updateTodo } from 'store/actions/todo';
 import { FormFC } from './Form';
 
 const mapDispatchToProps = dispatch =>

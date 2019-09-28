@@ -7,7 +7,7 @@ import {
   TODO_UPDATE,
   TODO_DELETE,
   TODO_TOGGLE_COMPLETE,
-} from '../../actions/todo';
+} from 'store/actions/todo';
 
 export const initialState = [
   TodoService.create('Have fun [YESTERDAY]', null, fromNow(-2), null, true),

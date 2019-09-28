@@ -20,12 +20,12 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "NODE_PATH=./src react-scripts start",
-    "build": "NODE_PATH=./src react-scripts build",
-    "test": "NODE_PATH=./src react-scripts test --no-watch",
-    "test:watch": "NODE_PATH=./src react-scripts test",
-    "test:watchAll": "NODE_PATH=./src react-scripts test --watchAll",
-    "eject": "NODE_PATH=./src react-scripts eject",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --no-watch",
+    "test:watch": "react-scripts test",
+    "test:watchAll": "react-scripts test --watchAll",
+    "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.js' --fix",
     "format": "prettier-eslint 'src/**/*.{js,json}' --write"
   },

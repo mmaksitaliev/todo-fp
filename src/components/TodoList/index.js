@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { toggleComplete } from '../../store/actions/todo';
+import { toggleComplete } from 'store/actions/todo';
 import { TodoListFC } from './TodoList';
 
 function mapDispatchToProps(dispatch) {
