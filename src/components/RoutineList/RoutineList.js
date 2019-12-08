@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { List, Icon, Popconfirm } from 'antd';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { List, Icon, Popconfirm } from 'antd'
 
-import { Header } from 'components/ListItemHeader';
-import { DangerIcon } from 'components/Icons';
+import { Header } from 'components/ListItemHeader'
+import { DangerIcon } from 'components/Icons'
 
 export function RoutineList({ routines, onEditClick, onRemoveClick }) {
   return (
@@ -19,14 +19,14 @@ export function RoutineList({ routines, onEditClick, onRemoveClick }) {
         />
       )}
     />
-  );
+  )
 }
 
 RoutineList.propTypes = {
   routines: PropTypes.array.isRequired,
   onEditClick: PropTypes.func,
   onRemoveClick: PropTypes.func,
-};
+}
 
 function RoutineItem({ routine, onEditClick, onRemoveClick }) {
   const actions = [
@@ -40,7 +40,7 @@ function RoutineItem({ routine, onEditClick, onRemoveClick }) {
     >
       <DangerIcon type='delete' />
     </Popconfirm>,
-  ];
+  ]
   return (
     <List.Item actions={actions}>
       <List.Item.Meta
@@ -48,11 +48,11 @@ function RoutineItem({ routine, onEditClick, onRemoveClick }) {
         description={routine.comment}
       />
     </List.Item>
-  );
+  )
 }
 
 RoutineItem.propTypes = {
   routine: PropTypes.object.isRequired,
   onEditClick: PropTypes.func,
   onRemoveClick: PropTypes.func,
-};
+}

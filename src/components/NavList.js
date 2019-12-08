@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { Nav } from './Nav';
+import { Nav } from './Nav'
 
 NavList.propTypes = {
   links: PropTypes.array.isRequired,
-};
+}
 
 export function NavList({ links }) {
   return (
@@ -14,5 +14,5 @@ export function NavList({ links }) {
         <Nav key={i} {...link} />
       ))}
     </ul>
-  );
+  )
 }

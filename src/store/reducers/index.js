@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 
-import { todos } from './todo/index';
-import { routines } from './routine/index';
+import { todos } from './todo/index'
+import { routines } from './routine/index'
 
-export const rootReducer = combineReducers({ todos, routines });
+export const rootReducer = combineReducers({ todos, routines })

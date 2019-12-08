@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { List, Checkbox, Icon, Popconfirm } from 'antd';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { List, Checkbox, Icon, Popconfirm } from 'antd'
 
-import { Header } from 'components/ListItemHeader';
-import { DangerIcon } from 'components/Icons';
+import { Header } from 'components/ListItemHeader'
+import { DangerIcon } from 'components/Icons'
 
 export function TodoListFC({
   todos,
@@ -25,7 +25,7 @@ export function TodoListFC({
         />
       )}
     />
-  );
+  )
 }
 
 TodoListFC.propTypes = {
@@ -33,7 +33,7 @@ TodoListFC.propTypes = {
   toggleComplete: PropTypes.func.isRequired,
   onEditClick: PropTypes.func,
   onRemoveClick: PropTypes.func,
-};
+}
 
 function TodoItem({ todo, toggleComplete, onEditClick, onRemoveClick }) {
   const actions = [
@@ -52,7 +52,7 @@ function TodoItem({ todo, toggleComplete, onEditClick, onRemoveClick }) {
     >
       <DangerIcon type='delete' />
     </Popconfirm>,
-  ];
+  ]
   return (
     <List.Item actions={actions}>
       <List.Item.Meta
@@ -60,7 +60,7 @@ function TodoItem({ todo, toggleComplete, onEditClick, onRemoveClick }) {
         description={todo.comment}
       />
     </List.Item>
-  );
+  )
 }
 
 TodoItem.propTypes = {
@@ -68,4 +68,4 @@ TodoItem.propTypes = {
   toggleComplete: PropTypes.func.isRequired,
   onEditClick: PropTypes.func,
   onRemoveClick: PropTypes.func,
-};
+}

@@ -1,11 +1,11 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 Nav.propTypes = {
   path: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-};
+}
 
 export function Nav({ path, label }) {
   return (
@@ -14,5 +14,5 @@ export function Nav({ path, label }) {
         {label}
       </NavLink>
     </li>
-  );
+  )
 }

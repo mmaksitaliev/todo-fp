@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-};
+}
 
 export function Header({ title, children }) {
   return (
@@ -12,5 +12,5 @@ export function Header({ title, children }) {
       <span>{title}</span>
       <span>{children}</span>
     </div>
-  );
+  )
 }

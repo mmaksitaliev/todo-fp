@@ -1,69 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Card, Input, DatePicker, Divider, Icon, message } from 'antd';
-import moment from 'moment';
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { Card, Input, DatePicker, Divider, Icon, message } from 'antd'
+import moment from 'moment'
 
-import { currentTime as getCurrentTime, endOfToday } from 'utils';
-import * as TodoService from 'domain/TodoService';
-import { useStateObject } from 'hooks/form';
-import { AddButton, UpdateButton, CloseButton } from 'components/Buttons';
+import { currentTime as getCurrentTime, endOfToday } from 'utils'
+import * as TodoService from 'domain/TodoService'
+import { useStateObject } from 'hooks/form'
+import { AddButton, UpdateButton, CloseButton } from 'components/Buttons'
 
-const { TextArea } = Input;
+const { TextArea } = Input
 
-export function FormFC({
-  todo,
-  updateTodo,
-  createTodo,
-  onHide,
-}) {
-  const currentTime = getCurrentTime();
+export function FormFC({ todo, updateTodo, createTodo, onHide }) {
+  const currentTime = getCurrentTime()
   const [tempTodo, onPropChange, setTodo] = useStateObject({
     title: 'default',
     comment: '',
     deadline: endOfToday(),
-  });
-  const [updateAction, setUpdateAction] = useState(false);
+  })
+  const [updateAction, setUpdateAction] = useState(false)
 
   useEffect(() => {
     if (todo && todo.id) {
-      const deadline = todo.deadline ? moment(todo.deadline) : null;
-      setTodo({ ...todo, deadline });
-      setUpdateAction(true);
+      const deadline = todo.deadline ? moment(todo.deadline) : null
+      setTodo({ ...todo, deadline })
+      setUpdateAction(true)
     }
-  }, [todo, setTodo]);
+  }, [todo, setTodo])
 
-  const clearTitle = () => onPropChange('title', '');
+  const clearTitle = () => onPropChange('title', '')
 
   const onInputChange = (prop, e) => {
-    onPropChange(prop, e.target.value);
-  };
+    onPropChange(prop, e.target.value)
+  }
 
   const onDeadlineChange = deadline => {
-    onPropChange('deadline', deadline);
-  };
+    onPropChange('deadline', deadline)
+  }
 
   const onSubmit = () => {
     if (updateAction) {
-      const updated = TodoService.update(tempTodo.id, tempTodo);
-      updateTodo(updated);
+      const updated = TodoService.update(tempTodo.id, tempTodo)
+      updateTodo(updated)
     } else {
       const newTodo = TodoService.create(
         tempTodo.title,
         tempTodo.comment,
-        tempTodo.deadline
-      );
-      createTodo(newTodo);
+        tempTodo.deadline,
+      )
+      createTodo(newTodo)
     }
-    onHide();
-    message.success('Successfully updated');
-  };
+    onHide()
+    message.success('Successfully updated')
+  }
 
-  const { title, comment, deadline } = tempTodo;
-  const headerTitle = updateAction ? 'Update Todo' : 'New Todo';
-  const SubmitButton = updateAction ? UpdateButton : AddButton;
-  const closeBtn = <CloseButton onClose={onHide} />;
-  const dateValueProp = deadline ? { value: deadline } : {};
-  const suffixProps = { title, clearTitle };
+  const { title, comment, deadline } = tempTodo
+  const headerTitle = updateAction ? 'Update Todo' : 'New Todo'
+  const SubmitButton = updateAction ? UpdateButton : AddButton
+  const closeBtn = <CloseButton onClose={onHide} />
+  const dateValueProp = deadline ? { value: deadline } : {}
+  const suffixProps = { title, clearTitle }
   return (
     <Card className='todo-form' title={headerTitle} extra={closeBtn}>
       <Input
@@ -94,7 +89,7 @@ export function FormFC({
         <SubmitButton onClick={onSubmit} />
       </div>
     </Card>
-  );
+  )
 }
 
 FormFC.propTypes = {
@@ -108,14 +103,14 @@ FormFC.propTypes = {
     comment: PropTypes.string,
     deadline: PropTypes.string,
   }),
-};
+}
 
 const Suffix = ({ title, clearTitle }) => {
-  if (!title) return <span />;
-  return <Icon type='close-circle' onClick={clearTitle} />;
-};
+  if (!title) return <span />
+  return <Icon type='close-circle' onClick={clearTitle} />
+}
 
 Suffix.propTypes = {
   title: PropTypes.string,
   clearTitle: PropTypes.func,
-};
+}

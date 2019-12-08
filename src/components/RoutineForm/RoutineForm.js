@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Card, Input, Divider, message } from 'antd';
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { Card, Input, Divider, message } from 'antd'
 
-import { CloseButton, UpdateButton, AddButton } from 'components/Buttons';
-import * as RoutineService from 'domain/RoutineService';
-import { useStateObject } from 'hooks/form';
+import { CloseButton, UpdateButton, AddButton } from 'components/Buttons'
+import * as RoutineService from 'domain/RoutineService'
+import { useStateObject } from 'hooks/form'
 
-const { TextArea } = Input;
+const { TextArea } = Input
 
 export function RoutineFormFC({
   routine,
@@ -18,37 +18,37 @@ export function RoutineFormFC({
     id: null,
     title: '',
     comment: '',
-  });
-  const [updateAction, setUpdateAction] = useState(false);
+  })
+  const [updateAction, setUpdateAction] = useState(false)
 
   useEffect(() => {
     if (routine && routine.id) {
-      setRoutine({ ...routine });
-      setUpdateAction(true);
+      setRoutine({ ...routine })
+      setUpdateAction(true)
     }
-  }, [routine, setRoutine]);
+  }, [routine, setRoutine])
 
   const onInputChange = (propName, e) => {
-    onPropChange(propName, e.target.value);
-  };
+    onPropChange(propName, e.target.value)
+  }
 
   const onSubmit = () => {
-    const { id, title, comment } = newRoutine;
+    const { id, title, comment } = newRoutine
     if (updateAction) {
-      const routine = RoutineService.update(id, title, comment);
-      updateRoutine(routine);
+      const routine = RoutineService.update(id, title, comment)
+      updateRoutine(routine)
     } else {
-      const routine = RoutineService.create(title, comment);
-      createRoutine(routine);
+      const routine = RoutineService.create(title, comment)
+      createRoutine(routine)
     }
-    onHide();
-    message.success('Successfully created a new Routine');
-  };
+    onHide()
+    message.success('Successfully created a new Routine')
+  }
 
-  const { title, comment } = newRoutine;
-  const headerTitle = updateAction ? 'Update Routine' : 'New Routine';
-  const SubmitButton = updateAction ? UpdateButton : AddButton;
-  const closeBtn = <CloseButton onClose={onHide} />;
+  const { title, comment } = newRoutine
+  const headerTitle = updateAction ? 'Update Routine' : 'New Routine'
+  const SubmitButton = updateAction ? UpdateButton : AddButton
+  const closeBtn = <CloseButton onClose={onHide} />
 
   return (
     <Card className='todo-form' title={headerTitle} extra={closeBtn}>
@@ -70,7 +70,7 @@ export function RoutineFormFC({
         <SubmitButton onClick={onSubmit} />
       </div>
     </Card>
-  );
+  )
 }
 
 RoutineFormFC.propTypes = {
@@ -82,4 +82,4 @@ RoutineFormFC.propTypes = {
     comment: PropTypes.string,
   }),
   onHide: PropTypes.func,
-};
+}
