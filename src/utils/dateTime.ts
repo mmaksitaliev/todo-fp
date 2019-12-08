@@ -16,7 +16,10 @@ export function formatDate(date: string) {
   return moment(date).format(FORMAT)
 }
 
-export function fromNow(value: DurationConstructor, unitOfTime = 'day') {
+export function fromNow(
+  value: number,
+  unitOfTime: DurationConstructor = 'day',
+) {
   return moment().add(value, unitOfTime)
 }
 
