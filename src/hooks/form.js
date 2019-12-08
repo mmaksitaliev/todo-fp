@@ -1,27 +1,27 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 export const useDoubleForm = () => {
   const [
     todoFormHidden,
     setTodoFormShown,
     setTodoFormHidden,
-  ] = useFormVisibility();
+  ] = useFormVisibility()
 
   const [
     routineFormHidden,
     setRoutineFormShown,
     setRoutineFormHidden,
-  ] = useFormVisibility();
+  ] = useFormVisibility()
 
   const onTodoFormShow = () => {
-    setTodoFormShown();
-    setRoutineFormHidden();
-  };
+    setTodoFormShown()
+    setRoutineFormHidden()
+  }
 
   const onRoutineFormShow = () => {
-    setRoutineFormShown();
-    setTodoFormHidden();
-  };
+    setRoutineFormShown()
+    setTodoFormHidden()
+  }
 
   return [
     todoFormHidden,
@@ -30,25 +30,25 @@ export const useDoubleForm = () => {
     routineFormHidden,
     onRoutineFormShow,
     setRoutineFormHidden,
-  ];
-};
+  ]
+}
 
 export const useFormVisibility = (isHidden = true) => {
-  const [hidden, setHidden] = useState(isHidden);
+  const [hidden, setHidden] = useState(isHidden)
 
-  const onFormShow = () => setHidden(false);
-  const onFormHide = () => setHidden(true);
+  const onFormShow = () => setHidden(false)
+  const onFormHide = () => setHidden(true)
 
-  return [hidden, onFormShow, onFormHide];
-};
+  return [hidden, onFormShow, onFormHide]
+}
 
 export const useStateObject = (defaultState = {}) => {
-  const [state, setState] = useState(defaultState);
+  const [state, setState] = useState(defaultState)
 
   const onPropChange = (prop, value) => {
-    const newState = { ...state, [prop]: value };
-    setState(newState);
-  };
+    const newState = { ...state, [prop]: value }
+    setState(newState)
+  }
 
-  return [state, onPropChange, setState];
-};
+  return [state, onPropChange, setState]
+}
