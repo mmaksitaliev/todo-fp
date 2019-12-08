@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-import { faCheck, faCoffee, faPlus } from '@fortawesome/free-solid-svg-icons'
-import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { Routes } from 'components/Routes'
 import { MainPage } from 'pages/MainPage'
-import { store } from './store'
-
-library.add(faCheck, faCoffee, faPlus)
+import { store } from 'store'
 
 export const routes = [
   { path: '/all', label: 'All', component: MainPage },
