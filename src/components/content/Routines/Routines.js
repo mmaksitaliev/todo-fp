@@ -1,34 +1,35 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { message } from 'antd';
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { message } from 'antd'
 
-import { NewButton } from 'components/Buttons';
-import RoutineList from 'components/RoutineList';
-import RoutineForm from 'components/RoutineForm';
-import Header from '../Header';
-import { useFormVisibility } from 'hooks/form';
+import { RoutineList } from 'components/RoutineList'
+import { RoutineForm } from 'components/RoutineForm'
+import { NewButton } from 'components/Buttons'
+import { useFormVisibility } from 'hooks/form'
 
-export default function Routines(props) {
-  const [routine, setRoutine] = useState();
-  const [formHidden, onFormShow, onFormHide] = useFormVisibility();
+import { Header } from '../Header'
+
+export function RoutinesFC(props) {
+  const [routine, setRoutine] = useState()
+  const [formHidden, onFormShow, onFormHide] = useFormVisibility()
 
   const onEditClick = routine => {
-    setRoutine(routine);
-    onFormShow();
-  };
+    setRoutine(routine)
+    onFormShow()
+  }
 
   const onRemoveClick = id => {
-    props.deleteRoutine(id);
-    message.success('Successfully deleted');
-  };
+    props.deleteRoutine(id)
+    message.success('Successfully deleted')
+  }
 
   const formProps = {
     routine,
     onHide: () => {
-      onFormHide();
-      setRoutine();
+      onFormHide()
+      setRoutine()
     },
-  };
+  }
 
   return (
     <div className='content'>
@@ -45,10 +46,10 @@ export default function Routines(props) {
         onRemoveClick={onRemoveClick}
       />
     </div>
-  );
+  )
 }
 
-Routines.propTypes = {
+RoutinesFC.propTypes = {
   routines: PropTypes.array.isRequired,
   deleteRoutine: PropTypes.func.isRequired,
-};
+}

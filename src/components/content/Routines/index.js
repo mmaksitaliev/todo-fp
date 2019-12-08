@@ -1,18 +1,15 @@
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-import { deleteRoutine } from 'store/actions';
-import Routines from './Routines';
+import { deleteRoutine } from 'store/actions/routine'
+import { RoutinesFC } from './Routines'
 
 const mapStateToProps = state => ({
   routines: state.routines,
-});
+})
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ deleteRoutine }, dispatch);
-};
+  return bindActionCreators({ deleteRoutine }, dispatch)
+}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Routines);
+export const Routines = connect(mapStateToProps, mapDispatchToProps)(RoutinesFC)
