@@ -9,7 +9,7 @@
     "test:watch": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.js' --fix",
-    "format": "prettier-eslint 'src/**/*.{js,json}' --write"
+    "format": "prettier 'src/**/*.{js,json}' --write"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -25,6 +25,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.7.1",
     "@fortawesome/react-fontawesome": "^0.1.8",
     "antd": "^3.26.0",
+    "eslint": "^6.7.2",
     "moment": "^2.24.0",
     "prop-types": "^15.7.1",
     "ramda": "^0.26.1",
@@ -39,12 +40,14 @@
   },
   "devDependencies": {
     "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.17.0",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
     "node-sass": "^4.13.0",
-    "prettier-eslint-cli": "^5.0.0"
+    "prettier": "1.19.1"
   }
 }

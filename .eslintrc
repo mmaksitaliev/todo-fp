@@ -1,6 +1,14 @@
 {
   "parser": "babel-eslint",
-  "plugins": ["react"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "react",
+    "prettier"
+  ],
   "rules": {
     "quotes": [2, "single"],
     "jsx-quotes": [2, "prefer-single"],
@@ -15,7 +23,6 @@
       }
     ]
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "settings": {
     "react": {
       "pragma": "React",
