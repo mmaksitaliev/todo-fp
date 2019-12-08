@@ -4,7 +4,7 @@ import { Card, Input, DatePicker, Divider, Icon, message } from 'antd'
 import moment from 'moment'
 
 import { currentTime as getCurrentTime, endOfToday } from 'utils'
-import * as TodoService from 'domain/TodoService'
+import * as TodoService from 'domain/Todo'
 import { useStateObject } from 'hooks/form'
 import { AddButton, UpdateButton, CloseButton } from 'components/Buttons'
 

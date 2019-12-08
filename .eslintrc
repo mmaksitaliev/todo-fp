@@ -21,6 +21,10 @@
         "exports": "always-multiline",
         "functions": "ignore"
       }
+    ],
+    "no-use-before-define": [
+      "error",
+      { "functions": false, "variables": false }
     ]
   },
   "overrides": [
@@ -47,6 +51,10 @@
       "rules": {
         "indent": "off",
         "no-unused-vars": "off",
+        "@typescript-eslint/no-use-before-define": [
+          "error",
+          { "functions": false, "variables": false }
+        ],
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/indent": ["error", 2],
         "@typescript-eslint/no-unused-vars": [
@@ -58,6 +66,19 @@
         "@typescript-eslint/array-type": [
           "error",
           { "default": "generic" }
+        ],
+        "@typescript-eslint/member-delimiter-style": [
+          "error",
+          {
+            "multiline": {
+              "delimiter": "none",
+              "requireLast": true
+            },
+            "singleline": {
+              "delimiter": "semi",
+              "requireLast": false
+            }
+          }
         ]
       }
     }

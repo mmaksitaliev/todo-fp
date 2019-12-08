@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { compose, bindActionCreators } from 'redux'
 
 import { capitalize } from 'utils'
-import { filterByPathname } from 'domain/TodoService'
+import { filterByPathname } from 'domain/Todo'
 import { deleteTodo } from 'store/actions/todo'
 
 import { GeneralFC } from './General'

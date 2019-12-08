@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Card, Input, Divider, message } from 'antd'
 
 import { CloseButton, UpdateButton, AddButton } from 'components/Buttons'
-import * as RoutineService from 'domain/RoutineService'
+import * as RoutineService from 'domain/Routine'
 import { useStateObject } from 'hooks/form'
 
 const { TextArea } = Input

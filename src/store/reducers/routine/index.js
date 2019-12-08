@@ -1,5 +1,5 @@
 import { createReducer } from 'utils'
-import { create } from 'domain/RoutineService'
+import { create } from 'domain/Routine'
 
 import {
   ROUTINE_CREATE,

@@ -1,5 +1,5 @@
 import { createReducer, fromNow } from 'utils'
-import * as TodoService from 'domain/TodoService'
+import * as TodoService from 'domain/Todo'
 
 import {
   TODO_CREATE,

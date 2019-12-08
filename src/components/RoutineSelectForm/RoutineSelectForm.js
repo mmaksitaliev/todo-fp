@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Card, List, Checkbox, message } from 'antd'
 
-import { createFromRoutine } from 'domain/TodoService'
+import { createFromRoutine } from 'domain/Todo'
 import { AddButton, CloseButton } from 'components/Buttons'
 import { Header } from 'components/ListItemHeader'
 

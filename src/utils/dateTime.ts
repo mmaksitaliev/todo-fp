@@ -30,22 +30,6 @@ export const endOfToday = () => {
   return moment().endOf('day')
 }
 
-export function dateGt(date1: string, date2: string) {
-  // checks date1 > deadline
-  const mDate1 = date1 && moment(date1)
-  const mDate2 = date2 && moment(date2)
-
-  return mDate1 && mDate2 && mDate1 > mDate2
-}
-
-export function dateLt(date1: string, date2: string) {
-  // checks date1 > deadline
-  const mDate1 = date1 && moment(date1)
-  const mDate2 = date2 && moment(date2)
-
-  return mDate1 && mDate2 && mDate1 < mDate2
-}
-
 function sortByDate<K extends keyof any>(datePropName: K) {
   return <T extends { [P in K]: string }>(a: T, b: T) => {
     if (moment(a[datePropName]) < moment(b[datePropName])) return 1
