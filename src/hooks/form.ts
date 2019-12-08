@@ -39,16 +39,16 @@ export const useFormVisibility = (isHidden = true) => {
   const onFormShow = () => setHidden(false)
   const onFormHide = () => setHidden(true)
 
-  return [hidden, onFormShow, onFormHide]
+  return [hidden, onFormShow, onFormHide] as const
 }
 
-export const useStateObject = (defaultState = {}) => {
+export const useStateObject = <T extends object>(defaultState: T = {} as T) => {
   const [state, setState] = useState(defaultState)
 
-  const onPropChange = (prop, value) => {
+  const setValue = (prop: keyof T, value: T[keyof T]) => {
     const newState = { ...state, [prop]: value }
     setState(newState)
   }
 
-  return [state, onPropChange, setState]
+  return [state, setValue, setState] as const
 }
