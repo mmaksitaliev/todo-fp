@@ -46,8 +46,8 @@ export function dateLt(date1: string, date2: string) {
   return mDate1 && mDate2 && mDate1 < mDate2
 }
 
-function sortByDate<T extends string>(datePropName: T) {
-  return (a: any, b: any) => {
+function sortByDate<K extends keyof any>(datePropName: K) {
+  return <T extends { [P in K]: string }>(a: T, b: T) => {
     if (moment(a[datePropName]) < moment(b[datePropName])) return 1
     else if (moment(a[datePropName]) > moment(b[datePropName])) return -1
     return 0
