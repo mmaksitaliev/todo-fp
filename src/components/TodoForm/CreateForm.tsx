@@ -54,7 +54,7 @@ export function CreateForm({ onHide }: CreateFormProps) {
     <Card
       className='todo-form'
       title={'New Todo'}
-      extra={<CloseButton onClose={onHide} />}
+      extra={<CloseButton onClick={onHide} />}
     >
       <Input
         value={todo.title}

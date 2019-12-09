@@ -10,7 +10,7 @@ export const createTodo = (todo: Todo) => ({ type: TODO_CREATE, todo })
 
 export const createTodos = (todos: Todos) => ({
   type: TODO_CREATE_BATCH,
-  newTodos: todos,
+  todos,
 })
 
 export const toggleComplete = (id: string) => ({

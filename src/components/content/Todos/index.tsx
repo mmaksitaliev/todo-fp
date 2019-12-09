@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
 import { Button, message } from 'antd'
 
 import { RoutineSelectForm } from 'components/RoutineSelectForm'
@@ -7,10 +7,16 @@ import { AddButton, NewButton } from 'components/Buttons'
 import { TodoList } from 'components/TodoList'
 import { TodoForm } from 'components/TodoForm'
 import { useDoubleForm } from 'hooks/form'
+import { usePageTodos } from 'hooks/usePageTodos'
+import { deleteTodo, toggleComplete } from 'store/actions/todo'
+import { Todo } from 'domain/Todo'
 
 import { Header } from '../Header'
 
-export function GeneralFC(props) {
+export function Todos() {
+  const dispatch = useDispatch()
+  const { todos, title } = usePageTodos()
+
   const [
     todoFormHidden,
     onTodoFormShow,
@@ -22,13 +28,15 @@ export function GeneralFC(props) {
 
   const [todo, setTodo] = useState()
 
-  const onEditClick = todo => {
+  const onEditClick = (todo: Todo) => {
     setTodo(todo)
     onTodoFormShow()
   }
 
-  const onRemoveClick = id => {
-    props.deleteTodo(id)
+  const toggleCompleteClick = (id: string) => dispatch(toggleComplete(id))
+
+  const onRemoveClick = (id: string) => {
+    dispatch(deleteTodo(id))
     message.success('Successfully deleted')
   }
 
@@ -36,22 +44,28 @@ export function GeneralFC(props) {
     todo,
     onHide: () => {
       onTodoFormHide()
-      setTodo()
+      setTodo({})
     },
   }
 
-  const actionProps = { onTodoFormShow, onRoutineFormShow }
-
   return (
     <div className='content'>
-      <Header title={props.title} actions={<Actions {...actionProps} />} />
+      <Header title={title}>
+        <Actions
+          onCreateTodoClick={onTodoFormShow}
+          onCreateRoutineClick={onRoutineFormShow}
+        />
+      </Header>
 
       {!todoFormHidden && <TodoForm {...formProps} />}
 
       {!routineFormHidden && <RoutineSelectForm onHide={onRoutineFormHide} />}
 
       <TodoList
-        todos={props.todos}
+        // eslint-disable-next-line
+        // @ts-ignore
+        todos={todos}
+        toggleComplete={toggleCompleteClick}
         onEditClick={onEditClick}
         onRemoveClick={onRemoveClick}
       />
@@ -59,22 +73,16 @@ export function GeneralFC(props) {
   )
 }
 
-GeneralFC.propTypes = {
-  todos: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired,
-  deleteTodo: PropTypes.func.isRequired,
+type ActionsProps = {
+  onCreateTodoClick: () => void
+  onCreateRoutineClick: () => void
 }
 
-const Actions = ({ onRoutineFormShow, onTodoFormShow }) => {
+const Actions = ({ onCreateTodoClick, onCreateRoutineClick }: ActionsProps) => {
   return (
     <Button.Group>
-      <AddButton onClick={onRoutineFormShow}>Add Routine</AddButton>
-      <NewButton onClick={onTodoFormShow}>New Todo</NewButton>
+      <AddButton onClick={onCreateRoutineClick}>Add Routine</AddButton>
+      <NewButton onClick={onCreateTodoClick}>New Todo</NewButton>
     </Button.Group>
   )
-}
-
-Actions.propTypes = {
-  onRoutineFormShow: PropTypes.func.isRequired,
-  onTodoFormShow: PropTypes.func.isRequired,
 }

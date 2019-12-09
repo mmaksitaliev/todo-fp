@@ -13,6 +13,8 @@ export const routes = [
   { path: '/routines', label: 'Routines', component: MainPage },
 ]
 
+export type RoutesConfig = typeof routes
+
 export class App extends Component {
   render() {
     return (

@@ -55,7 +55,7 @@ export function UpdateForm({ todo: toEdit, onHide }: UpdateFormProps) {
     <Card
       className='todo-form'
       title={'Updat Todo'}
-      extra={<CloseButton onClose={onHide} />}
+      extra={<CloseButton onClick={onHide} />}
     >
       <Input
         value={todo.title}

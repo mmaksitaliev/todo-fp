@@ -30,7 +30,7 @@ export const useDoubleForm = () => {
     routineFormHidden,
     onRoutineFormShow,
     setRoutineFormHidden,
-  ]
+  ] as const
 }
 
 export const useFormVisibility = (isHidden = true) => {

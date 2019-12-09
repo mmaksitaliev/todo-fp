@@ -1,15 +1,26 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { Card, List, Checkbox, message } from 'antd'
 
-import { createFromRoutine } from 'domain/Todo'
+import { Routines } from 'domain/Routine'
+import { createFromRoutine, Todos } from 'domain/Todo'
 import { AddButton, CloseButton } from 'components/Buttons'
 import { Header } from 'components/ListItemHeader'
 
-export function RoutineSelectFormFC(props) {
-  const [routines, setRoutines] = useState([...props.routines])
+type Props = {
+  routines: Routines
+  createTodos: (todos: Todos) => void
+  onHide: () => void
+}
 
-  const onChange = id => {
+export function RoutineSelectFormFC({
+  routines: stateRoutines,
+  createTodos,
+  onHide,
+}: Props) {
+  const initRoutines = stateRoutines.map(r => ({ ...r, checked: false }))
+  const [routines, setRoutines] = useState(initRoutines)
+
+  const onChange = (id: string) => {
     const newRoutines = routines.map(r => {
       if (r.id === id) {
         return { ...r, checked: !r.checked }
@@ -21,17 +32,14 @@ export function RoutineSelectFormFC(props) {
   }
 
   const onSubmit = () => {
-    const isSelected = routine => routine.checked
-    const newTodos = routines.filter(isSelected).map(createFromRoutine)
-    props.createTodos(newTodos)
-    props.onHide()
+    const newTodos = routines.filter(r => r.checked).map(createFromRoutine)
+    createTodos(newTodos)
+    onHide()
     message.success('Successfully updated')
   }
 
-  const closeBtn = <CloseButton onClose={props.onHide} />
-
   return (
-    <Card title='Add from routines' extra={closeBtn}>
+    <Card title='Add from routines' extra={<CloseButton onClick={onHide} />}>
       <List
         className='todo__list'
         itemLayout='horizontal'
@@ -58,10 +66,4 @@ export function RoutineSelectFormFC(props) {
       </div>
     </Card>
   )
-}
-
-RoutineSelectFormFC.propTypes = {
-  routines: PropTypes.array.isRequired,
-  createTodos: PropTypes.func.isRequired,
-  onHide: PropTypes.func.isRequired,
 }

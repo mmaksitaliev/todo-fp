@@ -1,13 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import PropTypes from 'prop-types'
 
-Nav.propTypes = {
-  path: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+type NavProps = {
+  path: string
+  label: string
 }
 
-export function Nav({ path, label }) {
+export function Nav({ path, label }: NavProps) {
   return (
     <li>
       <NavLink to={path} className='sidebar__link' activeClassName='active'>

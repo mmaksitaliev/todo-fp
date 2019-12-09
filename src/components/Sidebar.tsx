@@ -1,13 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { NavList } from 'components/NavList'
 
-SidebarFC.propTypes = {
-  links: PropTypes.array.isRequired,
+type Link = { path: string; label: string }
+
+type SidebarProps = {
+  links: Array<Link>
 }
 
-export function SidebarFC({ links }) {
+export function Sidebar({ links }: SidebarProps) {
   return (
     <div className='sidebar'>
       <NavList links={links} />

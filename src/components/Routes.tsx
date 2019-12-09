@@ -5,14 +5,15 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom'
-import PropTypes from 'prop-types'
 
-Routes.propTypes = {
-  routes: PropTypes.array.isRequired,
-  defRouteIndex: PropTypes.number.isRequired,
+type RouteConfig = { path: string; component: React.ComponentType }
+
+type RoutesProps = {
+  routes: Array<RouteConfig>
+  defRouteIndex: number
 }
 
-export function Routes({ routes, defRouteIndex }) {
+export function Routes({ routes, defRouteIndex }: RoutesProps) {
   const defaultPath = routes[defRouteIndex].path
   return (
     <Router>

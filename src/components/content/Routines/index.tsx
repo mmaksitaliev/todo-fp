@@ -1,25 +1,31 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
 import { message } from 'antd'
 
+import { Routine } from 'domain/Routine'
+import { RootState } from 'store'
+import { deleteRoutine } from 'store/actions/routine'
+import { useFormVisibility } from 'hooks/form'
 import { RoutineList } from 'components/RoutineList'
 import { RoutineForm } from 'components/RoutineForm'
 import { NewButton } from 'components/Buttons'
-import { useFormVisibility } from 'hooks/form'
 
 import { Header } from '../Header'
 
-export function RoutinesFC(props) {
+export function Routines() {
+  const dispatch = useDispatch()
+  const routines = useSelector(({ routines }: RootState) => routines)
+
   const [routine, setRoutine] = useState()
   const [formHidden, onFormShow, onFormHide] = useFormVisibility()
 
-  const onEditClick = routine => {
+  const onEditClick = (routine: Routine) => {
     setRoutine(routine)
     onFormShow()
   }
 
-  const onRemoveClick = id => {
-    props.deleteRoutine(id)
+  const onRemoveClick = (id: string) => {
+    dispatch(deleteRoutine(id))
     message.success('Successfully deleted')
   }
 
@@ -27,29 +33,23 @@ export function RoutinesFC(props) {
     routine,
     onHide: () => {
       onFormHide()
-      setRoutine()
+      setRoutine({})
     },
   }
 
   return (
     <div className='content'>
-      <Header
-        title={'Routines'}
-        actions={<NewButton onClick={onFormShow}>New Routine</NewButton>}
-      />
+      <Header title={'Routines'}>
+        <NewButton onClick={onFormShow}>New Routine</NewButton>
+      </Header>
 
       {!formHidden && <RoutineForm {...formProps} />}
 
       <RoutineList
-        routines={props.routines}
+        routines={routines}
         onEditClick={onEditClick}
         onRemoveClick={onRemoveClick}
       />
     </div>
   )
-}
-
-RoutinesFC.propTypes = {
-  routines: PropTypes.array.isRequired,
-  deleteRoutine: PropTypes.func.isRequired,
 }

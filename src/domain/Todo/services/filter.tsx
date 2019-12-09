@@ -24,16 +24,16 @@ function filterUpcoming(todos: Todos) {
   )(todos)
 }
 
-export function filterByPathname(
-  pathname: keyof typeof pathnameFilterMapping,
-  todos: Todos,
-) {
-  const filter = pathnameFilterMapping[pathname]
-  if (filter) {
-    return filter(todos)
-  }
+export function filterByPathname(pathname: string, todos: Todos) {
+  switch (pathname) {
+    case 'today':
+    case 'upcoming':
+    case 'completed':
+      return pathnameFilterMapping[pathname](todos)
 
-  return todos
+    default:
+      return todos
+  }
 }
 
 const isCompleted = R.propEq('completed', true)

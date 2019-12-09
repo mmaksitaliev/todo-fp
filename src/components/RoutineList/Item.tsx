@@ -4,31 +4,18 @@ import { List, Icon, Popconfirm } from 'antd'
 
 import { Header } from 'components/ListItemHeader'
 import { DangerIcon } from 'components/Icons'
+import { Routine } from 'domain/Routine'
+import { RoutineListProps } from '.'
 
-export function RoutineList({ routines, onEditClick, onRemoveClick }) {
-  return (
-    <List
-      className='todo__list'
-      itemLayout='horizontal'
-      dataSource={routines}
-      renderItem={routine => (
-        <RoutineItem
-          routine={routine}
-          onEditClick={onEditClick}
-          onRemoveClick={onRemoveClick}
-        />
-      )}
-    />
-  )
-}
+type RoutineItemProps = {
+  routine: Routine
+} & Pick<RoutineListProps, 'onEditClick' | 'onRemoveClick'>
 
-RoutineList.propTypes = {
-  routines: PropTypes.array.isRequired,
-  onEditClick: PropTypes.func,
-  onRemoveClick: PropTypes.func,
-}
-
-function RoutineItem({ routine, onEditClick, onRemoveClick }) {
+export function RoutineItem({
+  routine,
+  onEditClick,
+  onRemoveClick,
+}: RoutineItemProps) {
   const actions = [
     <Icon key='edit-icon' type='edit' onClick={() => onEditClick(routine)} />,
     <Popconfirm

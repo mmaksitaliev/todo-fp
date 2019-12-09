@@ -1,13 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { Nav } from './Nav'
 
-NavList.propTypes = {
-  links: PropTypes.array.isRequired,
+type Link = { path: string; label: string }
+
+type NavListProps = {
+  links: Array<Link>
 }
 
-export function NavList({ links }) {
+export function NavList({ links }: NavListProps) {
   return (
     <ul className='sidebar__list'>
       {links.map((link, i) => (
