@@ -43,7 +43,7 @@ export function CreateForm({ onHide }: CreateFormProps) {
   const onSubmit = () => {
     const newTodo = TodoService.create({
       ...todo,
-      deadline: todo.deadline.toString(),
+      deadline: todo.deadline.toISOString(),
     })
     dispatch(createTodo(newTodo))
     onHide()
