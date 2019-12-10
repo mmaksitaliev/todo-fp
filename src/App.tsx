@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Provider } from 'react-redux'
 
 import { Routes } from 'components/Routes'
@@ -15,12 +15,8 @@ export const routes = [
 
 export type RoutesConfig = typeof routes
 
-export class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Routes routes={routes} defRouteIndex={1} />
-      </Provider>
-    )
-  }
-}
+export const App = () => (
+  <Provider store={store}>
+    <Routes routes={routes} defRouteIndex={1} />
+  </Provider>
+)

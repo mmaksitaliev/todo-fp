@@ -6,7 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom'
 
-type RouteConfig = { path: string; component: React.ComponentType }
+type RouteConfig = { path: string; component: React.ComponentType<any> }
 
 type RoutesProps = {
   routes: Array<RouteConfig>
