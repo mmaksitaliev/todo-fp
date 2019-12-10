@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 
 import { routes } from 'App'
 import { Sidebar } from 'components/Sidebar'
-import { General } from 'components/content/General'
+import { Todos } from 'components/content/Todos'
 import { Routines } from 'components/content/Routines'
 
 export class MainPage extends Component {
   render() {
     const { pathname } = this.props.location
-    const Content = pathname === '/routines' ? Routines : General
+    const Content = pathname === '/routines' ? Routines : Todos
     return (
       <main className='app'>
         <Sidebar links={routes} />
