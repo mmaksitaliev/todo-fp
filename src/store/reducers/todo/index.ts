@@ -13,38 +13,38 @@ export const initialState = [
   create({
     title: 'Have fun [YESTERDAY]',
     comment: '',
-    deadline: fromNow(-2).toString(),
+    deadline: fromNow(-2).toISOString(),
     completed: true,
   }),
 
   create({
     title: 'Learn JS',
     comment: '',
-    deadline: fromNow(10).toString(),
+    deadline: fromNow(10).toISOString(),
   }),
 
   create({
     title: 'Learn FP',
     comment: '',
-    deadline: fromNow(20).toString(),
+    deadline: fromNow(20).toISOString(),
   }),
 
   create({
     title: 'Learn React',
     comment: '',
-    deadline: fromNow(30).toString(),
+    deadline: fromNow(30).toISOString(),
   }),
 
   create({
     title: 'Build Todo App',
     comment: '',
-    deadline: fromNow(0).toString(),
+    deadline: fromNow(0).toISOString(),
   }),
 
   create({
     title: 'Have fun',
     comment: '',
-    deadline: fromNow(0).toString(),
+    deadline: fromNow(0).toISOString(),
     completed: true,
   }),
 ]

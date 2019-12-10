@@ -43,7 +43,7 @@ export function UpdateForm({ todo: toEdit, onHide }: UpdateFormProps) {
   const onSubmit = () => {
     const toUpdate = {
       ...todo,
-      deadline: todo.deadline.toString(),
+      deadline: todo.deadline.toISOString(),
     }
     const updated = TodoService.update(toUpdate.id, toUpdate)
     dispatch(updateTodo(updated))

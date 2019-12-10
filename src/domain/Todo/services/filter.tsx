@@ -16,13 +16,16 @@ function filterTodays(todos: Todos) {
 
 function filterUpcoming(todos: Todos) {
   const isUpcomming = (todo: Todo) => {
-    return moment(todo.deadline).isSameOrBefore(endOfYesterday())
+    return moment(todo.deadline).isAfter(endOfToday())
   }
   return R.pipe<Todos, Todos, Todos>(
     R.filter(isUpcomming),
     R.sort(sortByCreatedDate),
   )(todos)
 }
+
+const isCompleted = R.propEq('completed', true)
+const filterCompleted = R.filter<Todo>(isCompleted)
 
 export function filterByPathname(pathname: string, todos: Todos) {
   switch (pathname) {
@@ -35,10 +38,6 @@ export function filterByPathname(pathname: string, todos: Todos) {
       return todos
   }
 }
-
-const isCompleted = R.propEq('completed', true)
-
-const filterCompleted = R.filter(isCompleted)
 
 const pathnameFilterMapping = {
   all: null,
