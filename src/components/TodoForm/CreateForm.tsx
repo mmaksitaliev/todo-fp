@@ -38,7 +38,10 @@ export function CreateForm({ onHide }: CreateFormProps) {
 
   const clearTitle = () => updateTodoProp('title', '')
 
-  const disabledDate = (date?: Moment) => currentTime().isAfter(date)
+  const disabledDate = (date?: Moment | null) => {
+    if (!date) return false
+    return currentTime().isAfter(date)
+  }
 
   const onSubmit = () => {
     const newTodo = TodoService.create({

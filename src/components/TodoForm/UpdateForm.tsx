@@ -38,7 +38,10 @@ export function UpdateForm({ todo: toEdit, onHide }: UpdateFormProps) {
     if (deadline) updateTodoProp('deadline', deadline)
   }
 
-  const disabledDate = (date?: Moment) => currentTime().isAfter(date)
+  const disabledDate = (date?: Moment | null) => {
+    if (!date) return false
+    return currentTime().isAfter(date)
+  }
 
   const onSubmit = () => {
     const toUpdate = {
