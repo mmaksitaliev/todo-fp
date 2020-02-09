@@ -4,9 +4,13 @@ import {
   Route,
   Switch,
   Redirect,
+  RouteComponentProps,
 } from 'react-router-dom'
 
-type RouteConfig = { path: string; component: React.ComponentType<any> }
+type RouteConfig = {
+  path: string
+  component: React.ComponentType<RouteComponentProps>
+}
 
 type RoutesProps = {
   routes: Array<RouteConfig>
