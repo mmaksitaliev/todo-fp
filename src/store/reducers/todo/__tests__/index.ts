@@ -1,49 +1,48 @@
-import { create } from 'domain/Todo'
-import { createTodo, deleteTodo, updateTodo } from 'store/actions/todo'
-import { todos as todoReducer, initialState } from '..'
+import { create, Todo } from 'domain/Todo'
+import { todos as todoReducer } from '..'
 
-const createWithId = (id: string, todo: any) => ({
+const createWithId = (id: string, todo: Pick<Todo, 'title'>) => ({
   ...todo,
   id,
-})
-
-it('Should return the initial state as no action type specified', () => {
-  const action = {}
-  const nextState = todoReducer(undefined, action)
-  expect(nextState).toBe(initialState)
+  comment: '',
+  completed: true,
+  tags: [] as Array<string>,
+  deadline: '',
+  dateCreated: '',
 })
 
 it('create TODO', () => {
+  const reducer = todoReducer.caseReducers.createTodo
+  const action = todoReducer.actions.createTodo
   const todo = create({ title: 'Learn FP', comment: '', deadline: '' })
-  const createAction = createTodo(todo)
-  const nextState = todoReducer(undefined, createAction)
-  expect(nextState).toEqual([...initialState, todo])
+  const nextState = reducer([], action(todo))
+  expect(nextState).toEqual([todo])
 })
 
 it('update TODO', () => {
+  const reducer = todoReducer.caseReducers.updateTodo
+  const action = todoReducer.actions.updateTodo
   const state = [createWithId('1', { title: 'Learn FP' })]
 
   const todo = createWithId('1', { title: 'Learn FP thoroughly' })
-  let updateAction = updateTodo(todo)
-  let nextState = todoReducer(state, updateAction)
+  let nextState = reducer(state, action(todo))
   expect(nextState).toEqual([todo])
 
   // test for not existing id
   todo.id = '2'
-  updateAction = updateTodo(todo)
-  nextState = todoReducer(state, updateAction)
+  nextState = reducer(state, action(todo))
   expect(nextState).toEqual(state)
 })
 
 it('remove TODO', () => {
+  const reducer = todoReducer.caseReducers.deleteTodo
+  const action = todoReducer.actions.deleteTodo
   const state = [createWithId('1', { title: 'Learn FP' })]
 
-  let deleteAction = deleteTodo('1')
-  let nextState = todoReducer(state, deleteAction)
+  let nextState = reducer(state, action('1'))
   expect(nextState).toEqual([])
 
   // test for not existing id
-  deleteAction = deleteTodo('5')
-  nextState = todoReducer(state, deleteAction)
+  nextState = reducer(state, action('5'))
   expect(nextState).toEqual(state)
 })

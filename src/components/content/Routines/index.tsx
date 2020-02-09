@@ -4,7 +4,7 @@ import { message } from 'antd'
 
 import { Routine } from 'domain/Routine'
 import { RootState } from 'store'
-import { deleteRoutine } from 'store/actions/routine'
+import { routineActions } from 'store/reducers/routine'
 import { useFormVisibility } from 'hooks/form'
 import { RoutineList } from 'components/RoutineList'
 import { RoutineForm } from 'components/RoutineForm'
@@ -25,7 +25,7 @@ export function Routines() {
   }
 
   const onRemoveClick = (id: string) => {
-    dispatch(deleteRoutine(id))
+    dispatch(routineActions.deleteRoutine(id))
     message.success('Successfully deleted')
   }
 

@@ -5,7 +5,7 @@ import { Card, Input, Divider, message } from 'antd'
 import { CloseButton, AddButton } from 'components/Buttons'
 import * as RoutineService from 'domain/Routine'
 import { useStateObject } from 'hooks/form'
-import { createRoutine } from 'store/actions/routine'
+import { routineActions } from 'store/reducers/routine'
 
 const { TextArea } = Input
 
@@ -32,7 +32,7 @@ export function Create({ onHide }: Props) {
   const onSubmit = () => {
     const { title, comment } = newRoutine
     const routine = RoutineService.create(title, comment)
-    dispatch(createRoutine(routine))
+    dispatch(routineActions.createRoutine(routine))
     onHide()
     message.success('Successfully created a new Routine')
   }

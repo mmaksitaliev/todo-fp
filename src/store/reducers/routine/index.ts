@@ -1,44 +1,44 @@
-import { createReducer } from 'utils'
+import { createSlice, CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 import { create, Routines, Routine } from 'domain/Routine'
 
-import {
-  ROUTINE_CREATE,
-  ROUTINE_UPDATE,
-  ROUTINE_DELETE,
-} from 'store/actions/routine'
-
-export const initialState = [
+const initialState: Routines = [
   create('Clean out inbox', ''),
   create('Exercise', ''),
   create('Be kind', 'be kind to people'),
 ]
 
-type CreateAction = { routine: Routine }
-type UpdateRoutine = { newRoutine: Routine }
-type DeleteRoutine = { id: string }
-
-export const createRoutine = (state: Routines, { routine }: CreateAction) => {
-  return state.concat(routine)
+export const createRoutine: CaseReducer<Routines, PayloadAction<Routine>> = (
+  state,
+  { payload },
+) => {
+  return state.concat(payload)
 }
 
-export const updateRoutine = (
-  state: Routines,
-  { newRoutine }: UpdateRoutine,
+export const updateRoutine: CaseReducer<Routines, PayloadAction<Routine>> = (
+  state,
+  { payload },
 ) => {
   return state.map(routine => {
-    if (routine.id === newRoutine.id) return { ...newRoutine }
+    if (routine.id === payload.id) return { ...payload }
     return routine
   })
 }
 
-export const deleteRoutine = (state: Routines, { id }: DeleteRoutine) => {
-  return state.filter(routine => routine.id !== id)
+export const deleteRoutine: CaseReducer<Routines, PayloadAction<string>> = (
+  state,
+  { payload },
+) => {
+  return state.filter(routine => routine.id !== payload)
 }
 
-const handlers = {
-  [ROUTINE_CREATE]: createRoutine,
-  [ROUTINE_UPDATE]: updateRoutine,
-  [ROUTINE_DELETE]: deleteRoutine,
-}
+export const routines = createSlice({
+  name: 'routines',
+  initialState,
+  reducers: {
+    createRoutine,
+    updateRoutine,
+    deleteRoutine,
+  },
+})
 
-export const routines = createReducer(initialState, handlers)
+export const routineActions = routines.actions
