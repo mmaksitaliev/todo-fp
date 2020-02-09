@@ -4,7 +4,7 @@ import { Moment } from 'moment'
 import { message, Card, Input, DatePicker, Divider } from 'antd'
 
 import * as TodoService from 'domain/Todo'
-import { createTodo } from 'store/actions/todo'
+import { todoActions } from 'store/reducers/todo'
 import { CloseButton, AddButton } from 'components/Buttons'
 import { endOfToday, currentTime } from 'utils'
 import { useStateObject } from 'hooks/form'
@@ -45,7 +45,7 @@ export function CreateForm({ onHide }: CreateFormProps) {
       ...todo,
       deadline: todo.deadline.toISOString(),
     })
-    dispatch(createTodo(newTodo))
+    dispatch(todoActions.createTodo(newTodo))
     onHide()
     message.success('Successfully created')
   }

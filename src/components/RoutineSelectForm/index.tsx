@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { RootState } from 'store'
-import { createTodos } from 'store/actions/todo'
+import { todoActions } from 'store/reducers/todo'
 import { Todos } from 'domain/Todo'
 import { RoutineSelectFormFC } from './RoutineSelectForm'
 
@@ -16,7 +16,7 @@ export const RoutineSelectForm = (props: RoutineSelectFormProps) => {
   return (
     <RoutineSelectFormFC
       routines={routines}
-      createTodos={(todos: Todos) => dispatch(createTodos(todos))}
+      createTodos={(todos: Todos) => dispatch(todoActions.createTodos(todos))}
       {...props}
     />
   )

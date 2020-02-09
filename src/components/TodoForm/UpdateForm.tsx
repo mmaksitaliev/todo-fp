@@ -4,7 +4,7 @@ import moment, { Moment } from 'moment'
 import { message, Card, Input, DatePicker, Divider } from 'antd'
 
 import * as TodoService from 'domain/Todo'
-import { updateTodo } from 'store/actions/todo'
+import { todoActions } from 'store/reducers/todo'
 import { useStateObject } from 'hooks/form'
 import { currentTime } from 'utils'
 import { CloseButton, UpdateButton } from 'components/Buttons'
@@ -46,7 +46,7 @@ export function UpdateForm({ todo: toEdit, onHide }: UpdateFormProps) {
       deadline: todo.deadline.toISOString(),
     }
     const updated = TodoService.update(toUpdate.id, toUpdate)
-    dispatch(updateTodo(updated))
+    dispatch(todoActions.updateTodo(updated))
     onHide()
     message.success('Successfully updated')
   }

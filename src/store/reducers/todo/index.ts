@@ -1,15 +1,9 @@
-import { createReducer, fromNow } from 'utils'
+import { createSlice, PayloadAction, CaseReducer } from '@reduxjs/toolkit'
+
 import { create, Todos, Todo } from 'domain/Todo'
+import { fromNow } from 'utils'
 
-import {
-  TODO_CREATE,
-  TODO_CREATE_BATCH,
-  TODO_UPDATE,
-  TODO_DELETE,
-  TODO_TOGGLE_COMPLETE,
-} from 'store/actions/todo'
-
-export const initialState = [
+export const initialState: Todos = [
   create({
     title: 'Have fun [YESTERDAY]',
     comment: '',
@@ -49,44 +43,57 @@ export const initialState = [
   }),
 ]
 
-type CreateTodoAction = { todo: Todo }
-type CreateTodosAction = { todos: Todos }
-type ToggleCompleteAction = { id: string }
-type UpdateTodoAction = { todo: Todo }
-type DeleteTodoAction = { id: string }
-
-function createTodo(state: Todos, { todo }: CreateTodoAction) {
-  return state.concat([todo])
+const createTodo: CaseReducer<Todos, PayloadAction<Todo>> = (
+  state,
+  { payload },
+) => {
+  return state.concat([payload])
 }
 
-function createTodos(state: Todos, { todos }: CreateTodosAction) {
-  return state.concat(todos)
+const createTodos: CaseReducer<Todos, PayloadAction<Todos>> = (
+  state,
+  { payload },
+) => {
+  return state.concat(payload)
 }
 
-function toggleComplete(state: Todos, { id }: ToggleCompleteAction) {
+const toggleComplete: CaseReducer<Todos, PayloadAction<string>> = (
+  state,
+  { payload },
+) => {
   return state.map(todo => {
-    if (todo.id === id) todo.completed = !todo.completed
+    if (todo.id === payload) todo.completed = !todo.completed
     return todo
   })
 }
 
-function updateTodo(state: Todos, { todo: toUpdate }: UpdateTodoAction) {
+const updateTodo: CaseReducer<Todos, PayloadAction<Todo>> = (
+  state,
+  { payload },
+) => {
   return state.map(todo => {
-    if (todo.id === toUpdate.id) return toUpdate
+    if (todo.id === payload.id) return payload
     return todo
   })
 }
 
-function deleteTodo(state: Todos, { id }: DeleteTodoAction) {
-  return state.filter(todo => todo.id !== id)
+const deleteTodo: CaseReducer<Todos, PayloadAction<string>> = (
+  state,
+  { payload },
+) => {
+  return state.filter(todo => todo.id !== payload)
 }
 
-const handlers = {
-  [TODO_CREATE]: createTodo,
-  [TODO_CREATE_BATCH]: createTodos,
-  [TODO_UPDATE]: updateTodo,
-  [TODO_DELETE]: deleteTodo,
-  [TODO_TOGGLE_COMPLETE]: toggleComplete,
-}
+export const todos = createSlice({
+  name: 'todos',
+  initialState,
+  reducers: {
+    createTodo,
+    createTodos,
+    toggleComplete,
+    updateTodo,
+    deleteTodo,
+  },
+})
 
-export const todos = createReducer(initialState, handlers)
+export const todoActions = todos.actions

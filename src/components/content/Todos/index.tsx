@@ -8,7 +8,7 @@ import { TodoList } from 'components/TodoList'
 import { TodoForm } from 'components/TodoForm'
 import { useDoubleForm } from 'hooks/form'
 import { usePageTodos } from 'hooks/usePageTodos'
-import { deleteTodo, toggleComplete } from 'store/actions/todo'
+import { todoActions } from 'store/reducers/todo'
 import { Todo } from 'domain/Todo'
 
 import { Header } from '../Header'
@@ -33,10 +33,11 @@ export function Todos() {
     onTodoFormShow()
   }
 
-  const toggleCompleteClick = (id: string) => dispatch(toggleComplete(id))
+  const toggleCompleteClick = (id: string) =>
+    dispatch(todoActions.toggleComplete(id))
 
   const onRemoveClick = (id: string) => {
-    dispatch(deleteTodo(id))
+    dispatch(todoActions.deleteTodo(id))
     message.success('Successfully deleted')
   }
 
