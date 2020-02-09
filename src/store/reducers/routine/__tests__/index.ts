@@ -1,48 +1,39 @@
 import * as RoutineService from 'domain/Routine'
-import {
-  createRoutine,
-  deleteRoutine,
-  updateRoutine,
-} from 'store/actions/routine'
-import { routines as routineReducer, initialState } from '..'
-
-it('Should return the initial state as no action type specified', () => {
-  const action = {}
-  const nextState = routineReducer(undefined, action)
-  expect(nextState).toBe(initialState)
-})
+import { routines } from 'store/reducers/routine'
 
 it('create Routine', () => {
+  const reducer = routines.caseReducers.createRoutine
+  const action = routines.actions.createRoutine
   const routine = RoutineService.create('Learn FP', '')
-  const createAction = createRoutine(routine)
-  const nextState = routineReducer(undefined, createAction)
-  expect(nextState).toEqual([...initialState, routine])
+
+  const nextState = reducer([], action(routine))
+  expect(nextState).toEqual([routine])
 })
 
 it('update Routine', () => {
-  const state = [{ id: '1', title: 'Learn FP' }]
+  const reducer = routines.caseReducers.updateRoutine
+  const action = routines.actions.updateRoutine
+  const state = [{ id: '1', title: 'Learn FP' } as RoutineService.Routine]
 
   const routine = { id: '1', title: 'Learn FP thoroughly', comment: '' }
-  let updateAction = updateRoutine(routine)
-  let nextState = routineReducer(state, updateAction)
+  let nextState = reducer(state, action(routine))
   expect(nextState).toEqual([routine])
 
   // test for not existing id
   routine.id = '2'
-  updateAction = updateRoutine(routine)
-  nextState = routineReducer(state, updateAction)
+  nextState = reducer(state, action(routine))
   expect(nextState).toEqual(state)
 })
 
 it('remove Routine', () => {
-  const state = [{ id: '1', title: 'Learn FP' }]
+  const reducer = routines.caseReducers.deleteRoutine
+  const action = routines.actions.deleteRoutine
+  const state = [{ id: '1', title: 'Learn FP' } as RoutineService.Routine]
 
-  let deleteAction = deleteRoutine('1')
-  let nextState = routineReducer(state, deleteAction)
+  let nextState = reducer(state, action('1'))
   expect(nextState).toEqual([])
 
   // test for not existing id
-  deleteAction = deleteRoutine('5')
-  nextState = routineReducer(state, deleteAction)
+  nextState = reducer(state, action('5'))
   expect(nextState).toEqual(state)
 })

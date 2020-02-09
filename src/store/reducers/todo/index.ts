@@ -3,7 +3,7 @@ import { createSlice, PayloadAction, CaseReducer } from '@reduxjs/toolkit'
 import { create, Todos, Todo } from 'domain/Todo'
 import { fromNow } from 'utils'
 
-export const initialState: Todos = [
+const initialState: Todos = [
   create({
     title: 'Have fun [YESTERDAY]',
     comment: '',

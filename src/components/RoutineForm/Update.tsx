@@ -1,10 +1,11 @@
 import React, { ChangeEvent } from 'react'
 import { Card, Input, Divider, message } from 'antd'
 
-import { updateRoutine } from 'store/actions/routine'
+import { routineActions } from 'store/reducers/routine'
 import * as RoutineService from 'domain/Routine'
 import { useStateObject } from 'hooks/form'
 import { CloseButton, UpdateButton } from 'components/Buttons'
+import { useDispatch } from 'react-redux'
 
 const { TextArea } = Input
 
@@ -14,6 +15,7 @@ type Props = {
 }
 
 export function Update({ routine, onHide }: Props) {
+  const dispatch = useDispatch()
   const [newRoutine, onPropChange] = useStateObject({ ...routine })
 
   const onInputChange = (
@@ -26,7 +28,7 @@ export function Update({ routine, onHide }: Props) {
   const onSubmit = () => {
     const { id, title, comment } = newRoutine
     const routine = RoutineService.update(id, title, comment)
-    updateRoutine(routine)
+    dispatch(routineActions.updateRoutine(routine))
     onHide()
     message.success('Successfully created a new Routine')
   }
