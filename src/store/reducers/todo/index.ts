@@ -62,7 +62,7 @@ const toggleComplete: CaseReducer<Todos, PayloadAction<string>> = (
   { payload },
 ) => {
   return state.map(todo => {
-    if (todo.id === payload) todo.completed = !todo.completed
+    if (todo.id === payload) return { ...todo, completed: !todo.completed }
     return todo
   })
 }
